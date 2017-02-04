@@ -18,6 +18,7 @@ public class RSATest {
     String input="i remember that september" +
             "Hello World! RSA encryption!!!";
     final String MESSAGE="FUNCTION INVOKATION IS NOT AVAILABLE";
+
     @Before
     public void init(){
         rsa=new RSA();

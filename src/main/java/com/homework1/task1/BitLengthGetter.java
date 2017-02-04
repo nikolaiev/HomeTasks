@@ -6,6 +6,9 @@ package com.homework1.task1;
  * Class designed to get bit-length of integer primitive types
  */
 public class BitLengthGetter {
+
+    private BitLengthGetter(){}
+
     /**
      * @return bit length of int type
      * */

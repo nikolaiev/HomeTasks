@@ -1,10 +1,12 @@
 package com.homework1.task1;
 
 public class Main {
+    private Main(){}
+
     public static void main(String[] args) {
-        System.out.println(BitLengthGetter.getByteLength());
-        System.out.println(BitLengthGetter.getShortLength());
-        System.out.println(BitLengthGetter.getIntLength());
-        System.out.println(BitLengthGetter.getLongLength());
+        System.err.println(BitLengthGetter.getByteLength());
+        System.err.println(BitLengthGetter.getShortLength());
+        System.err.println(BitLengthGetter.getIntLength());
+        System.err.println(BitLengthGetter.getLongLength());
     }
 }

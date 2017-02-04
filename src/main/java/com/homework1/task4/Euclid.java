@@ -9,7 +9,7 @@ import com.homework1.task3.OutOfRangeExeption;
  * "max common divisor" algorithms for 2 integer numbers
  */
 public class Euclid {
-    private final String VAL_OUT_OF_RANGE="VALUE OUT OF RANGE"; //exception message
+    private static final String VAL_OUT_OF_RANGE="VALUE OUT OF RANGE"; //exception message
     /**
      * Getting max common divisor method
      * @param num1  integer number
@@ -34,24 +34,21 @@ public class Euclid {
     private int findComDiv(int a, int b) {
         if(a==0)
             return b;
-        if(b==0)
+        else if(b==0 || a==b)
             return a;
-        if(a==b)
-            return a;
-        if(a==1 || b==1)
+        else if(a==1 || b==1)
             return 1;
-
         /*check odd*/
-        if ((a&1 | b&1)== 0)
+        else if ((a&1 | b&1)== 0)
             return findComDiv(a >>1, b >>1)<<1;
         /*check a is even and b is odd*/
-        if ((a&1)==0 && (b&1)==1)
+        else if ((a&1)==0 && (b&1)==1)
             return findComDiv(a >>1, b);
 
-        if ((b&1)==0 && (a&1)==1)
+        else if ((b&1)==0 && (a&1)==1)
             return findComDiv(a, b >>1);
 
-        if (a < b)
+        else if (a < b)
             return findComDiv((b - a) >>1, a);
         else
             return findComDiv((a - b) >>1, b);
