@@ -1,12 +1,16 @@
 package com.homework1.task2;
 
 import com.homework1.task1.BitLengthGetter;
+import com.homework1.task3.OutOfRangeExeption;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import static org.hamcrest.CoreMatchers.isA;
 import static org.junit.Assert.*;
 
 /**
@@ -18,6 +22,10 @@ public class BitChangerTest {
     public void init(){
         bitChanger=new BitChanger();
     }
+
+    @Rule
+    public ExpectedException exception=ExpectedException.none();
+
     @Test
     public void changeBitToOne() throws Exception {
         assertEquals(16,bitChanger.changeBitToOne(0,4));
@@ -48,6 +56,26 @@ public class BitChangerTest {
         /*boundary cases*/
         assertEquals(Integer.MIN_VALUE,method.invoke(bitChanger,BitLengthGetter.getIntLength()-1));
         assertEquals(1,method.invoke(bitChanger,0));
+    }
+
+    @Test
+    public void getMaskFloorExeption() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = BitChanger.class.getDeclaredMethod("getMask", int.class);
+        method.setAccessible(true);
+
+        exception.expectCause(isA(OutOfRangeExeption.class));
+        method.invoke(bitChanger,-1);
+
+    }
+
+    @Test
+    public void getMaskCeilExeption() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = BitChanger.class.getDeclaredMethod("getMask", int.class);
+        method.setAccessible(true);
+
+        exception.expectCause(isA(OutOfRangeExeption.class));
+        method.invoke(bitChanger,BitLengthGetter.getIntLength());
+
     }
 
 }

@@ -1,5 +1,8 @@
 package com.homework1.task2;
 
+import com.homework1.task1.BitLengthGetter;
+import com.homework1.task3.OutOfRangeExeption;
+
 /**
  * Created by vlad on 03.02.17.
  *
@@ -7,13 +10,16 @@ package com.homework1.task2;
  * in integer primitive types
  */
 public class BitChanger{
+    final static String UNAVAILABLE_BIT_POS="UNAVAILABLE BIT POSITION";
+
     /**
      * Set special bit to one
      * @param num input number
      * @param pos bit position (starts from 0)
      * @return updated number
      * */
-    public int changeBitToOne(int num,int pos){
+    public int changeBitToOne(int num,int pos) throws OutOfRangeExeption {
+
         int mask=getMask(pos);  //bitwise mask
         return num^mask;        //update number
     }
@@ -24,7 +30,7 @@ public class BitChanger{
      * @param pos bit position (starts from 0)
      * @return updated number
      */
-    public int changeBitToZero(int num, int pos){
+    public int changeBitToZero(int num, int pos) throws OutOfRangeExeption {
         int mask=getMask(pos);  //bitwise mask
         mask=~mask;             //11110...1111
         return num&mask;        //update number
@@ -35,7 +41,10 @@ public class BitChanger{
      * @param pos position of 1 in mask
      * @return mask in integer representation
      */
-    private int getMask(int pos){
+    private int getMask(int pos) throws OutOfRangeExeption {
+        if(pos<0 || pos> BitLengthGetter.getIntLength()-1){
+            throw new OutOfRangeExeption(UNAVAILABLE_BIT_POS);
+        }
         int mask=1;//0000..01
 
         while(pos>0){
