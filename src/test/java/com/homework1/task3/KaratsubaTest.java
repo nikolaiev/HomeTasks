@@ -35,6 +35,7 @@ public class KaratsubaTest {
     }
 
     /*critical cases*/
+    /*exception expected*/
     @Test
     public void multiplyExeptionParamExeption() throws OutOfRangeExeption {
         thrown.expect(OutOfRangeExeption.class);
@@ -42,6 +43,8 @@ public class KaratsubaTest {
         assertEquals(Long.MIN_VALUE,karatsuba.multiply(Long.MIN_VALUE,1));
     }
 
+
+    /*exception expected*/
     @Test
     public void multiplyExeption() throws OutOfRangeExeption {
         thrown.expect(OutOfRangeExeption.class);
@@ -49,6 +52,7 @@ public class KaratsubaTest {
         assertEquals(0,karatsuba.multiply(500000000000000L,100000000000000000L));
     }
 
+    /*exception expected*/
     @Test
     public void multiplyExeptionNegative() throws OutOfRangeExeption{
         thrown.expect(OutOfRangeExeption.class);

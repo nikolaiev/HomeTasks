@@ -40,8 +40,8 @@ public class RSA {
         SecureRandom secureRandom=new SecureRandom();
 
         /*secret prime numbers*/
-        BigInteger primeNum1=new BigInteger(bitlen/2,100,secureRandom);
-        BigInteger primeNum2=new BigInteger(bitlen/2,100,secureRandom);
+        BigInteger primeNum1=new BigInteger(bitlen,100,secureRandom);
+        BigInteger primeNum2=new BigInteger(bitlen,100,secureRandom);
 
         module=primeNum1.multiply(primeNum2);
 

@@ -27,6 +27,7 @@ public class EuclidTest {
         euclid = new Euclid();
     }
 
+    /*ok results expected*/
     @Test
     public void getMaxCommonDivisor() throws Exception {
         assertEquals(5,euclid.getMaxCommonDivisor(15,20));
@@ -51,6 +52,7 @@ public class EuclidTest {
     }
 
     /*critical*/
+    /*exception expected*/
     @Test
     public void getPositiveReprExeption() throws OutOfRangeExeption, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method=Euclid.class.getDeclaredMethod("getPositiveRepr", int.class);

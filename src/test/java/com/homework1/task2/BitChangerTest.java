@@ -26,6 +26,7 @@ public class BitChangerTest {
     @Rule
     public ExpectedException exception=ExpectedException.none();
 
+    /*Ok tests*/
     @Test
     public void changeBitToOne() throws Exception {
         assertEquals(16,bitChanger.changeBitToOne(0,4));
@@ -58,6 +59,8 @@ public class BitChangerTest {
         assertEquals(1,method.invoke(bitChanger,0));
     }
 
+    /*critical values */
+    /*exception expected*/
     @Test
     public void getMaskFloorExeption() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = BitChanger.class.getDeclaredMethod("getMask", int.class);
@@ -68,6 +71,7 @@ public class BitChangerTest {
 
     }
 
+    /*exception expected*/
     @Test
     public void getMaskCeilExeption() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = BitChanger.class.getDeclaredMethod("getMask", int.class);

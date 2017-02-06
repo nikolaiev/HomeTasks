@@ -17,7 +17,7 @@ public class RSATest {
     RSA rsa;
     String input="i remember that september" +
             "Hello World! RSA encryption!!!";
-    final String MESSAGE="FUNCTION INVOKATION IS NOT AVAILABLE";
+    final String MESSAGE="FUNCTION INVOCATION IS NOT AVAILABLE";
 
     @Before
     public void init(){
@@ -30,7 +30,7 @@ public class RSATest {
     @Test
     public void encryptDecrypt() throws Exception {
         String test=rsa.encrypt(input);
-        assertEquals(input,rsa.decrypt(test));
+        assertEquals("texts must be equals",input,rsa.decrypt(test));
     }
 
     @Test

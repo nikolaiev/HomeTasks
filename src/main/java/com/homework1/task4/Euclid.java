@@ -34,24 +34,24 @@ public class Euclid {
     private int findComDiv(int a, int b) {
         if(a==0)
             return b;
-        else if(b==0 || a==b)
+        if(b==0 || a==b)
             return a;
-        else if(a==1 || b==1)
+        if(a==1 || b==1)
             return 1;
         /*check odd*/
-        else if ((a&1 | b&1)== 0)
+        if ((a&1 | b&1)== 0)
             return findComDiv(a >>1, b >>1)<<1;
         /*check a is even and b is odd*/
-        else if ((a&1)==0 && (b&1)==1)
+        if ((a&1)==0 && (b&1)==1)
             return findComDiv(a >>1, b);
 
-        else if ((b&1)==0 && (a&1)==1)
+        if ((b&1)==0 && (a&1)==1)
             return findComDiv(a, b >>1);
 
-        else if (a < b)
+        if (a < b)
             return findComDiv((b - a) >>1, a);
-        else
-            return findComDiv((a - b) >>1, b);
+
+        return findComDiv((a - b) >>1, b);
     }
 
     /**
