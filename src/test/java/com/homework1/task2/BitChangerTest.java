@@ -78,10 +78,13 @@ public class BitChangerTest {
     public void getMaskFloorExeption() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = BitChanger.class.getDeclaredMethod("getMask", int.class);
         method.setAccessible(true);
-
-        exception.expectMessage(UNAVAILABLE_BIT_POS);
-        method.invoke(bitChanger,-1);
-
+        try {
+            method.invoke(bitChanger, -1);
+        }
+        catch (InvocationTargetException e){
+            Throwable cause=e.getCause();
+            assertEquals(UNAVAILABLE_BIT_POS,cause.getMessage());
+        }
     }
 
     /*exception expected*/
@@ -90,8 +93,13 @@ public class BitChangerTest {
         Method method = BitChanger.class.getDeclaredMethod("getMask", int.class);
         method.setAccessible(true);
 
-        exception.expectMessage(UNAVAILABLE_BIT_POS);
-        method.invoke(bitChanger,BitLengthGetter.getIntLength());
+        try {
+            method.invoke(bitChanger, BitLengthGetter.getIntLength());
+        }
+        catch (InvocationTargetException e){
+            Throwable cause=e.getCause();
+            assertEquals(UNAVAILABLE_BIT_POS,cause.getMessage());
+        }
 
     }
 

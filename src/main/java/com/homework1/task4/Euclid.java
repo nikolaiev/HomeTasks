@@ -13,9 +13,9 @@ public class Euclid {
      * @param num1  integer number
      * @param num2  integer number
      * @return      max common divisor
-     * @throws Exception thrown if on or more number == Integer.MIN_VALUE
+     * @throws IllegalArgumentException thrown if on or more number == Integer.MIN_VALUE
      */
-    public int getMaxCommonDivisor(int num1,int num2) throws Exception  {
+    public int getMaxCommonDivisor(int num1,int num2) throws IllegalArgumentException  {
         /*get absolute values if possible*/
         num1=getPositiveRepr(num1);
         num2=getPositiveRepr(num2);
@@ -57,14 +57,14 @@ public class Euclid {
      * if not - throws OutOfRangeExeption
      * @param num   integer number
      * @return      absolute number value
-     * @throws Exception thrown if on or more number == Integer.MIN_VALUE
+     * @throws IllegalArgumentException thrown if on or more number == Integer.MIN_VALUE
      */
-    private int getPositiveRepr(int num) throws Exception{
+    private int getPositiveRepr(int num) throws IllegalArgumentException{
         if(num<0){
             if(num!=Integer.MIN_VALUE)
                 return -num;
             else
-                throw new Exception(VAL_OUT_OF_RANGE);
+                throw new IllegalArgumentException(VAL_OUT_OF_RANGE);
         }
         return num;
     }

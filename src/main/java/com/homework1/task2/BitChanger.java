@@ -17,7 +17,7 @@ public class BitChanger{
      * @param pos bit position (starts from 0)
      * @return updated number
      * */
-    public int changeBitToOne(int num,int pos) throws Exception {
+    public int changeBitToOne(int num,int pos) throws IllegalArgumentException {
         int mask=getMask(pos);  //bitwise mask
         return num^mask;        //update number
     }
@@ -28,7 +28,7 @@ public class BitChanger{
      * @param pos bit position (starts from 0)
      * @return updated number
      */
-    public int changeBitToZero(int num, int pos) throws Exception {
+    public int changeBitToZero(int num, int pos) throws IllegalArgumentException {
         int mask=getMask(pos);  //bitwise mask
         mask=~mask;             //11110...1111
         return num&mask;        //update number
@@ -40,9 +40,9 @@ public class BitChanger{
      * @return mask in integer representation
      * @throws Exception if we cannot create mask for concrete position
      */
-    private int getMask(int pos) throws Exception {
+    private int getMask(int pos) throws IllegalArgumentException {
         if(pos<0 || pos> BitLengthGetter.getIntLength()-1){
-            throw new Exception(UNAVAILABLE_BIT_POS);
+            throw new IllegalArgumentException(UNAVAILABLE_BIT_POS);
         }
         int mask=1;//0000..01
 

@@ -27,12 +27,14 @@ public class RSATest {
     @Rule
     public ExpectedException thrown= ExpectedException.none();
 
+    /*Methods encrypt decrypt test*/
     @Test
     public void encryptDecrypt() throws Exception {
         String test=rsa.encrypt(input);
         assertEquals("texts must be equals",input,rsa.decrypt(test));
     }
 
+    /*only decrypt method test*/
     @Test
     public void decrypt() throws Exception {
 
@@ -44,16 +46,18 @@ public class RSATest {
         assertEquals(input,rsa.decrypt(test));
     }
 
+    /*decrypt error test*/
+    /*should be exception, as object was not fully-functional*/
     @Test
     public void  decryptError() throws UnavailableFunctionalityException {
 
         /*create encrypt only RSA object*/
         RSA rsaConfigured=new RSA(rsa.getOpenExponent(),rsa.getModule());
 
-        /*waiting for exeption*/
+        /*waiting for exception*/
         thrown.expect(UnavailableFunctionalityException.class);
         thrown.expectMessage(MESSAGE);
-        String test=rsaConfigured.decrypt(input);
+        rsaConfigured.decrypt(input);
     }
 
 }
