@@ -1,7 +1,6 @@
 package com.homework1.task2;
 
 import com.homework1.task1.BitLengthGetter;
-import com.homework1.task3.OutOfRangeExeption;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,7 +16,9 @@ import static org.junit.Assert.*;
  * Created by vlad on 04.02.17.
  */
 public class BitChangerTest {
+    final static String UNAVAILABLE_BIT_POS="UNAVAILABLE BIT POSITION";
     BitChanger bitChanger;
+
     @Before
     public void init(){
         bitChanger=new BitChanger();
@@ -36,6 +37,18 @@ public class BitChangerTest {
 
     @Test
     public void changeBitToZero() throws Exception {
+        /*boundary cases*/
+        assertEquals(0,bitChanger.changeBitToZero(1,0));
+        assertEquals(0,bitChanger.changeBitToZero(Integer.MIN_VALUE,
+                BitLengthGetter.getIntLength()-1));
+
+        /*middle case*/
+        assertEquals(4,bitChanger.changeBitToZero(6,1));
+
+    }
+
+    @Test
+    public void changeBitToZeroExeption() throws Exception {
         /*boundary cases*/
         assertEquals(0,bitChanger.changeBitToZero(1,0));
         assertEquals(0,bitChanger.changeBitToZero(Integer.MIN_VALUE,
@@ -66,7 +79,7 @@ public class BitChangerTest {
         Method method = BitChanger.class.getDeclaredMethod("getMask", int.class);
         method.setAccessible(true);
 
-        exception.expectCause(isA(OutOfRangeExeption.class));
+        exception.expectMessage(UNAVAILABLE_BIT_POS);
         method.invoke(bitChanger,-1);
 
     }
@@ -77,7 +90,7 @@ public class BitChangerTest {
         Method method = BitChanger.class.getDeclaredMethod("getMask", int.class);
         method.setAccessible(true);
 
-        exception.expectCause(isA(OutOfRangeExeption.class));
+        exception.expectMessage(UNAVAILABLE_BIT_POS);
         method.invoke(bitChanger,BitLengthGetter.getIntLength());
 
     }

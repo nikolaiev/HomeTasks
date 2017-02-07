@@ -12,7 +12,6 @@ public class RSA {
     private BigInteger module;          //module value
     private BigInteger openExponent;    //open exponent value
     private BigInteger closedExponent;  //closed (secret) exponent value
-    private int bitlen;                 //primes number bit length
 
     /**
      * Build fully functional object with default values
@@ -54,6 +53,7 @@ public class RSA {
         while (eulerVal.gcd(openExponent).intValue() > 1) {
             openExponent = openExponent.add(new BigInteger("2"));
         }
+
         closedExponent =openExponent.modInverse(eulerVal);
     }
 

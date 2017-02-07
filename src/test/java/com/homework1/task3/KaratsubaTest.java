@@ -1,9 +1,12 @@
 package com.homework1.task3;
 
+import com.homework1.task1.BitLengthGetter;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.math.BigInteger;
 
 import static org.junit.Assert.*;
 
@@ -13,10 +16,6 @@ import static org.junit.Assert.*;
 public class KaratsubaTest {
     Karatsuba karatsuba;
 
-    /*exception messages*/
-    private final String RESULT_OUT_OF_RANGE="MULTIPLICATION RESULT IS OUT OF RANGE";
-    private final String VAL_OUT_OF_RANGE="VALUE OUT OF RANGE";
-
     @Rule
     public ExpectedException thrown= ExpectedException.none();
 
@@ -25,40 +24,56 @@ public class KaratsubaTest {
         karatsuba=new Karatsuba();
     }
 
+    /*normal cases*/
+    /*long params*/
     @Test
-    public void multiply() throws OutOfRangeExeption {
-        /*middle cases*/
-        assertEquals(-10, karatsuba.multiply(-2, 5));
-        assertEquals(354 * 78, karatsuba.multiply(354, 78));
-        assertEquals(354 * 78, karatsuba.multiply(78, 354));
-        assertEquals(-354 * 78, karatsuba.multiply(78, -354));
+    public void multiply() {
+        assertEquals(BigInteger.valueOf(-10), karatsuba.multiply(-2, 5));
+        assertEquals(BigInteger.valueOf(17179869184L * 78), karatsuba.multiply(17179869184L, 78));
+        assertEquals(BigInteger.valueOf(354 * 78), karatsuba.multiply(78, 354));
+        assertEquals(BigInteger.valueOf(-354 * 78), karatsuba.multiply(78, -354));
     }
 
-    /*critical cases*/
-    /*exception expected*/
     @Test
-    public void multiplyExeptionParamExeption() throws OutOfRangeExeption {
-        thrown.expect(OutOfRangeExeption.class);
-        thrown.expectMessage(VAL_OUT_OF_RANGE);
-        assertEquals(Long.MIN_VALUE,karatsuba.multiply(Long.MIN_VALUE,1));
+    public void multiplyExeption() {
+        assertEquals(BigInteger.valueOf(500000000000000L).multiply(BigInteger.valueOf(100000000000000000L)),
+                karatsuba.multiply(500000000000000L,100000000000000000L));
     }
 
-
-    /*exception expected*/
     @Test
-    public void multiplyExeption() throws OutOfRangeExeption {
-        thrown.expect(OutOfRangeExeption.class);
-        thrown.expectMessage(RESULT_OUT_OF_RANGE);
-        assertEquals(0,karatsuba.multiply(500000000000000L,100000000000000000L));
-    }
-
-    /*exception expected*/
-    @Test
-    public void multiplyExeptionNegative() throws OutOfRangeExeption{
-        thrown.expect(OutOfRangeExeption.class);
-        thrown.expectMessage(RESULT_OUT_OF_RANGE);
-        assertEquals(0,karatsuba.multiply(-50000000000000L,50000000000000L));
+    public void multiplyExeptionNegative() {
+        assertEquals(BigInteger.valueOf(-500000000000000L).multiply(BigInteger.valueOf(100000000000000000L)),
+                karatsuba.multiply(-500000000000000L,100000000000000000L));
 
     }
 
+    @Test
+    public void multiplyBigParam() {
+        assertEquals(new BigInteger("-18446744073709551614"),karatsuba.multiply(Long.MIN_VALUE+1,2));
+    }
+
+    /*BigIntegers params*/
+    @Test
+    public void multyBigIntegers(){
+        assertEquals(new BigInteger("128734512374891283476128734")
+                        .multiply(new BigInteger("328746129834632846189234192834")),
+                karatsuba.multiply(new BigInteger("128734512374891283476128734"),
+                        new BigInteger("328746129834632846189234192834")));
+    }
+
+    @Test
+    public void multyBigIntegersNegativeBoth(){
+        assertEquals(new BigInteger("128734512374891283476128734")
+                        .multiply(new BigInteger("328746129834632846189234192834")),
+                karatsuba.multiply(new BigInteger("-128734512374891283476128734"),
+                        new BigInteger("-328746129834632846189234192834")));
+    }
+
+    @Test
+    public void multyBigIntegersNegative(){
+        assertEquals(new BigInteger("-128734512374891283476128734")
+                        .multiply(new BigInteger("328746129834632846189234192834")),
+                karatsuba.multiply(new BigInteger("-128734512374891283476128734"),
+                        new BigInteger("328746129834632846189234192834")));
+    }
 }

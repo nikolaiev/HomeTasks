@@ -2,6 +2,8 @@ package com.homework1.task3;
 
 import com.homework1.task1.BitLengthGetter;
 
+import java.math.BigInteger;
+
 import static java.lang.Math.log10;
 
 /**
@@ -10,66 +12,68 @@ import static java.lang.Math.log10;
  * Class design to provide Karatsuba fast numbers multiplying functions
  */
 public class Karatsuba{
-    private static final byte BASE=10; //numeric system base
-
-    /*exception messages*/
-    private static final String RESULT_OUT_OF_RANGE="MULTIPLICATION RESULT IS OUT OF RANGE";
-    private static final String VAL_OUT_OF_RANGE="VALUE OUT OF RANGE";
+    //private final String VAL_OUT_OF_RANGE="VALUE OUT OF RANGE";
+    //private static final byte BASE=2; //numeric system base
 
     /**
-     * Multiplying 2 integer numbers
+     * Multiplying 2 long numbers
      * @param num1  multiplier
      * @param num2  multiplier
      * @return  multiplication result
-     * @throws OutOfRangeExeption
      */
-    public long multiply(long num1,long num2) throws OutOfRangeExeption{
-        int halfLength= BitLengthGetter.getLongLength()/2;
+    public BigInteger multiply(long num1,long num2){
+        return multiply(BigInteger.valueOf(num1),BigInteger.valueOf(num2));
+    }
+
+    /**
+     * Multiplying 2 bigInteger numbers
+     * @param num1
+     * @param num2
+     * @return multiplication result
+     */
+    public BigInteger multiply(BigInteger num1, BigInteger num2) {
+        int halfLength= Math.max(num1.bitLength(),num2.bitLength())/2;
 
         /*flag if multiplication result is negative*/
         boolean isResultNegative=false;
 
         /*check value sign*/
-        if(num1<0){
-            if(num1!=Long.MIN_VALUE){
-                num1=-num1;
-                isResultNegative=true;
-            }
-            else{
-                throw new OutOfRangeExeption(VAL_OUT_OF_RANGE);
-            }
+        if(num1.signum()==-1){
+            num1=BigInteger.ZERO.subtract(num1);
+            isResultNegative=true;
         }
 
         /*check value sign*/
-        if(num2<0){
-            if(num2!=Long.MIN_VALUE){
-                num2=-num2;
-                isResultNegative=!isResultNegative;
-            }
-            else
-                throw new OutOfRangeExeption(VAL_OUT_OF_RANGE);
-        }
-
-        /*one more check*/
-        int num1Length=(int)Math.ceil(log10(num1));     //number1 length
-        int num2Length=(int)Math.ceil(log10(num2));     //number2 length
-
-        /*check if result will overflow Long max value*/
-        if(num1Length + num2Length >= Math.ceil(log10(Long.MAX_VALUE))){
-            throw new OutOfRangeExeption(RESULT_OUT_OF_RANGE);
+        if(num2.signum()==-1){
+            num2=BigInteger.ZERO.subtract(num2);
+            isResultNegative=!isResultNegative;
         }
 
         /*get numbers parts*/
-        long a0=num1<<halfLength>>halfLength;
-        long b0=num2<<halfLength>>halfLength;
+        BigInteger a0=num1.xor(num1.shiftRight(halfLength).shiftLeft(halfLength));
+        BigInteger b0=num2.xor(num2.shiftRight(halfLength).shiftLeft(halfLength));
 
-        long a1=num1>>halfLength<<halfLength;
-        long b1=num2>>halfLength<<halfLength;
+        BigInteger a1=num1.shiftRight(halfLength);
+        BigInteger b1=num2.shiftRight(halfLength);
 
         /*karatsuba formula*/
-        long result=a0 * b0 + (( a0 + a1 ) * ( b0 + b1 ) - a0 * b0 - a1 * b1 ) *
-                (long)Math.pow(BASE,halfLength) + a1 * b1 * (long)Math.pow(BASE,halfLength*2.);
+        BigInteger result =
+                a0.multiply(b0).add(
+                        (
+                            (a0.add(a1)).multiply(b0.add(b1))
+                            .subtract(a0.multiply(b0)).subtract(a1.multiply(b1))
+                        )
+                        .shiftLeft(halfLength)
+                        /*.multiply(
+                                BigInteger.valueOf((long)Math.pow(BASE,halfLength))
+                        )*/
+                ).add(
+                        a1.multiply(b1).shiftLeft(halfLength*2)//.multiply(BigInteger.valueOf((long)Math.pow(BASE,halfLength*2.)))
+                );
 
-        return isResultNegative?-result:result;
+        return isResultNegative?
+                /*-result*/
+                BigInteger.ZERO.subtract(result):
+                result;
     }
 }
