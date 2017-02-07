@@ -17,7 +17,8 @@ public class RSATest {
     RSA rsa;
     String input="i remember that september" +
             "Hello World! RSA encryption!!!";
-    final String MESSAGE="FUNCTION INVOCATION IS NOT AVAILABLE";
+
+    final String MESSAGE="FUNCTION INVOCATION IS NOT AVAILABLE. OBJECT ARE NOT FULLY FUNCTIONAL";
 
     @Before
     public void init(){
@@ -49,13 +50,13 @@ public class RSATest {
     /*decrypt error test*/
     /*should be exception, as object was not fully-functional*/
     @Test
-    public void  decryptError() throws UnavailableFunctionalityException {
+    public void  decryptError() throws UnsupportedOperationException {
 
         /*create encrypt only RSA object*/
         RSA rsaConfigured=new RSA(rsa.getOpenExponent(),rsa.getModule());
 
         /*waiting for exception*/
-        thrown.expect(UnavailableFunctionalityException.class);
+        thrown.expect(UnsupportedOperationException.class);
         thrown.expectMessage(MESSAGE);
         rsaConfigured.decrypt(input);
     }

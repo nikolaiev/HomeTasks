@@ -9,6 +9,7 @@ import java.security.SecureRandom;
  * Class designed to provide base RSA implementation
  */
 public class RSA {
+    private final static String MESSAGE="FUNCTION INVOCATION IS NOT AVAILABLE. OBJECT ARE NOT FULLY FUNCTIONAL";
     private BigInteger module;          //module value
     private BigInteger openExponent;    //open exponent value
     private BigInteger closedExponent;  //closed (secret) exponent value
@@ -78,11 +79,11 @@ public class RSA {
      * Decryption function
      * @param message   input (encrypted) text
      * @return          encrypted text
-     * @throws UnavailableFunctionalityException if object was not fully build
+     * @throws UnsupportedOperationException if object was not fully build
      */
-    public String decrypt(String message) throws UnavailableFunctionalityException {
+    public String decrypt(String message) throws UnsupportedOperationException {
         if(closedExponent==null){
-            throw new UnavailableFunctionalityException();
+            throw new UnsupportedOperationException(MESSAGE);
         }
         return new String((new BigInteger(message)).modPow(closedExponent, module).toByteArray());
     }

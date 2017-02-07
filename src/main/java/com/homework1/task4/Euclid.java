@@ -25,31 +25,31 @@ public class Euclid {
 
     /**
      * Base method of Euclid algorithm
-     * @param a integer number
-     * @param b integer number
+     * @param num1 integer number
+     * @param num2 integer number
      * @return  max common divisor
      */
-    private int findComDiv(int a, int b) {
-        if(a==0)
-            return b;
-        if(b==0 || a==b)
-            return a;
-        if(a==1 || b==1)
+    private int findComDiv(int num1, int num2) {
+        if(num1==0)
+            return num2;
+        if(num2==0 || num1==num2)
+            return num1;
+        if(num1==1 || num2==1)
             return 1;
         /*check odd*/
-        if ((a&1 | b&1)== 0)
-            return findComDiv(a >>1, b >>1)<<1;
+        if ((num1&1 | num2&1)== 0)
+            return findComDiv(num1 >>1, num2 >>1)<<1;
         /*check a is even and b is odd*/
-        if ((a&1)==0 && (b&1)==1)
-            return findComDiv(a >>1, b);
+        if ((num1&1)==0 && (num2&1)==1)
+            return findComDiv(num1 >>1, num2);
 
-        if ((b&1)==0 && (a&1)==1)
-            return findComDiv(a, b >>1);
+        if ((num2&1)==0 && (num1&1)==1)
+            return findComDiv(num1, num2 >>1);
 
-        if (a < b)
-            return findComDiv((b - a) >>1, a);
+        if (num1 < num2)
+            return findComDiv((num2 - num1) >>1, num1);
 
-        return findComDiv((a - b) >>1, b);
+        return findComDiv((num1 - num2) >>1, num2);
     }
 
     /**
