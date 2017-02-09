@@ -37,25 +37,46 @@ public class RSA {
      * @param bitlen    secret primes numbers bit letgth
      */
     public RSA(int bitlen){
-        SecureRandom secureRandom=new SecureRandom();
+        //TODO refactor
+        setExponentsKeyPair(bitlen);
+    }
 
-        /*secret prime numbers*/
-        BigInteger primeNum1=new BigInteger(bitlen,100,secureRandom);
-        BigInteger primeNum2=new BigInteger(bitlen,100,secureRandom);
+    private void setExponentsKeyPair(int bitlen){
+
+        /*getting simple pair*/
+        BigInteger keys[]=getSimpleKeyPair(bitlen);
+
+        setExponents(keys);
+    }
+
+    private void setExponents(BigInteger [] keys){
+        BigInteger primeNum1=keys[0];
+        BigInteger primeNum2=keys[1];
 
         module=primeNum1.multiply(primeNum2);
 
-        /*Euler function value*/
+        /*getting eiler value*/
         BigInteger eulerVal=(primeNum1.subtract(BigInteger.ONE))
                 .multiply(primeNum2.subtract(BigInteger.ONE));
-
+        /*set open exponent*/
         openExponent=BigInteger.valueOf(3);
 
+        /*Euler function value*/
         while (eulerVal.gcd(openExponent).intValue() > 1) {
             openExponent = openExponent.add(new BigInteger("2"));
         }
 
         closedExponent =openExponent.modInverse(eulerVal);
+    }
+
+    private BigInteger[] getSimpleKeyPair (int bitlen){
+        SecureRandom secureRandom=new SecureRandom();
+        /*secret prime numbers*/
+        BigInteger primeNum1=new BigInteger(bitlen,100,secureRandom);
+        BigInteger primeNum2=new BigInteger(bitlen,100,secureRandom);
+
+        BigInteger[] result={primeNum1,primeNum2};
+        return result;
     }
 
     public BigInteger getModule() {

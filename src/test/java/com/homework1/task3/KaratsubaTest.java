@@ -34,6 +34,11 @@ public class KaratsubaTest {
         assertEquals(BigInteger.valueOf(-354 * 78), karatsuba.multiply(78, -354));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testNull(){
+        assertEquals(0,karatsuba.multiply(null,null));
+    }
+
     @Test
     public void multiplyExeption() {
         assertEquals(BigInteger.valueOf(500000000000000L).multiply(BigInteger.valueOf(100000000000000000L)),
