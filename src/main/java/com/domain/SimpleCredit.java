@@ -7,19 +7,19 @@ import java.util.Map;
 /**
  * Created by vlad on 14.02.17.
  */
-public class CreditLine extends Credit{
+public class SimpleCredit extends Credit{
 
-    boolean isExpandable;
+    boolean isAmortizable;
 
-    public CreditLine(String title, Date bdate, Date edate, Map<Currency, Double> percent,boolean isExpandable) {
+    public SimpleCredit(String title, Date bdate, Date edate, Map<Currency,Double> percent, boolean isAmortizable) {
         this.title = title;
         this.bdate = bdate;
         this.edate = edate;
-        this.isExpandable = isExpandable;
         this.percent = percent;
+        this.isAmortizable=isAmortizable;
     }
 
-    public CreditLine() {
+    public SimpleCredit() {
     }
 
     public String getTitle() {
@@ -45,15 +45,6 @@ public class CreditLine extends Credit{
     public void setEdate(Date edate) {
         this.edate = edate;
     }
-
-    public boolean isExpandable() {
-        return isExpandable;
-    }
-
-    public void setExpandable(boolean expandable) {
-        isExpandable = expandable;
-    }
-
 
     public Map<Currency, Double> getPercent() {
         return percent;
