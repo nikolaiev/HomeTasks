@@ -1,28 +1,20 @@
 package task8.com;
 
-import java.util.LinkedList;
-
 /**
  * Created by vlad on 14.02.17.
  */
+public interface MyList<T> extends Cloneable{
+    void add(T elem);
 
-public class   MyList <T>{
-    Node<T> first;
+    void add(T elem, int index);
 
-    public MyList(){
-    }
+    void remove(int index);
 
-    public T add(T elem){
+    void remove(T elem);
 
-    }
+    T get(int index);
 
-    private static class Node<T>{
-        T item;
-        Node<T> next;
+    void set(int index, T elem);
 
-        Node(T elem, Node<T> next){
-            this.item=elem;
-            this.next=next;
-        }
-    }
+    MyList<T> clone();
 }
