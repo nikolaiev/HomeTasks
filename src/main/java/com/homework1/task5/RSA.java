@@ -42,8 +42,7 @@ public class RSA {
     }
 
     private void setExponentsKeyPair(int bitlen){
-
-        /*getting simple pair*/
+        /*factory method*/
         BigInteger keys[]=getSimpleKeyPair(bitlen);
 
         setExponents(keys);

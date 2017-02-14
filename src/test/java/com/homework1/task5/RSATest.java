@@ -86,7 +86,9 @@ public class RSATest {
     @Test
     public void setExponents() throws Exception {
         Method setExponents = RSA.class.getDeclaredMethod("setExponents",
-                BigInteger[].class);
+                int.class);
+        /*Method setExponents = RSA.class.getDeclaredMethod("setExponents",
+                BigInteger[].class);*/
         setExponents.setAccessible(true);
 
         BigInteger[] testKeys=new BigInteger[]{BigInteger.valueOf(7),BigInteger.valueOf(3)};
