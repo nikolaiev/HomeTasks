@@ -20,10 +20,14 @@ public class RSA {
     }
 
     public static RSA getRSA(BigInteger openExponent,BigInteger module){
+        if(openExponent==null||module==null)
+            throw new IllegalArgumentException();
         return new RSA(openExponent,module);
     }
 
     public static RSA getRSA(int bitlen){
+        if(bitlen<16)
+            throw new IllegalArgumentException("Bitlen must be more than 16");
         BigInteger keys[]=getSimpleKeyPair(bitlen);
 
         BigInteger primeNum1=keys[0];
