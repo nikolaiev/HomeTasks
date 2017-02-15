@@ -3,7 +3,7 @@ package task8.com;
 /**
  * Created by vlad on 14.02.17.
  */
-public interface MyList<T> extends Cloneable{
+public interface MyList<T> {
     void add(T elem);
 
     void add(T elem, int index);
@@ -14,7 +14,11 @@ public interface MyList<T> extends Cloneable{
 
     T get(int index);
 
+    T getFirst();
+
+    T getLast();
+
     void set(int index, T elem);
 
-    MyList<T> clone();
+    int getSize();
 }

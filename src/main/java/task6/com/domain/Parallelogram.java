@@ -23,7 +23,8 @@ public class Parallelogram extends Shape {
         this.point=new Point(x,y);
     }
 
+    @Override
     public double getSquare() {
-        return sideOne*sideTwo*Math.sin(angle);
+        return Math.abs(sideOne*sideTwo*Math.sin(angle));
     }
 }

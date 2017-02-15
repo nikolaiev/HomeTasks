@@ -1,6 +1,7 @@
 package task9.com;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by vlad on 15.02.17.
@@ -10,8 +11,10 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
     Node<T> first=null;
     Node<T> last=null;
 
-    public MyLinkedListImpl(){
-    }
+    /**
+     * Empty constructor
+     */
+    public MyLinkedListImpl(){}
 
     public T get(int index) {
         Node<T> tempNode=first;
@@ -67,21 +70,30 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
         if(first==null){
             first=new Node<T>(null,elem,null);
             last=first;
-            return;
-        }
 
-        Node<T> newNode=new Node<T>(last,elem,null);
-        last.next=newNode;
-        last=newNode;
+        }
+        else{
+            Node<T> newNode=new Node<T>(last,elem,null);
+            last.next=newNode;
+            last=newNode;
+        }
         size++;
     }
 
-    public void add(int index, T elem) {
+    public void add(int index, T elem)  {
         checkPositionIndex(index);
 
         if(index==size-1){
             add(elem);
             return;
+        }
+
+        if(index==0){
+
+            Node<T> tempNode=new Node<T>(null,elem,first);
+            first.prev=tempNode;
+            first=tempNode;
+            size++;
         }
 
         Node<T> tempNode=first;
@@ -146,8 +158,11 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
         return false;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     private void unlink(Node<T> x) {
-        final T element = x.item;
         final Node<T> next = x.next;
         final Node<T> prev = x.prev;
 
@@ -191,6 +206,8 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
         public boolean hasNext(){return size>index;}
 
         public T next(){
+            if(!hasNext())
+                throw new NoSuchElementException();
             return get(index++);
         }
 

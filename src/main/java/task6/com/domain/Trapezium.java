@@ -31,6 +31,7 @@ public class Trapezium extends Shape{
     }
 
 
+    @Override
     public double getSquare() {
         double height=side*Math.sin(angle);
         return (mainSideOne+mainSideTwo)/2*height;

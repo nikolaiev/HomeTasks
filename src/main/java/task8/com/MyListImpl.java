@@ -3,6 +3,7 @@ package task8.com;
 import java.io.ObjectInputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 /**
  * OneWayLinkedList
@@ -14,8 +15,10 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
     Node<T> last;
     int size = 0;
 
-    public MyListImpl() {
-    }
+    /**
+     * Empty constructor
+     */
+    public MyListImpl() {}
 
     public void add(T elem) {
         final Node<T> l = last;
@@ -38,7 +41,7 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
         else {
             int i = 0;
             Node<T> currNode = first;
-            while (i != index) {
+            while (i != index-1) {
                 currNode = currNode.next;
                 i++;
             }
@@ -52,11 +55,18 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
     public void remove(int index) {
         checkPositionIndex(index);
 
+        if(index==0){
+            first=first.next;
+            size--;
+            return;
+        }
+
         int i=0;
         Node<T> prevNode=first;
 
-        while (i!=index-1){
+        while (i<index-1){
             prevNode=prevNode.next;
+            i++;
         }
 
         Node<T> removableNode=prevNode.next;
@@ -64,22 +74,6 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
         size--;
     }
 
-    /*public void remove(T elem) {
-        int index=0;
-
-        if(first==null)
-            return;
-        Node<T> currNode=first;
-        //TODO rewrite
-        do{
-            if(currNode.item.equals(elem)){
-                currNode=currNode.next;
-                size--;
-                break;
-            }
-            currNode=currNode.next;
-        }while(currNode!=null);
-    }*/
 
     public T get(int index) {
         checkPositionIndex(index);
@@ -123,15 +117,8 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
             throw new IndexOutOfBoundsException();
     }
 
-    /*non deep clone*/
-    public MyList<T> clone() {
-        MyList<T> copy=new MyListImpl<T>();
-        Node<T> currNode=first;
-        for(int i=0;i<size;i++){
-            copy.add(currNode.item);
-            currNode=currNode.next;
-        }
-        return copy;
+    public int getSize() {
+        return size;
     }
 
     public Iterator<T> iterator()
@@ -146,6 +133,8 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
         public boolean hasNext(){return size>index;}
 
         public T next(){
+            if(!hasNext())
+                throw new NoSuchElementException();
             return get(index++);
         }
 

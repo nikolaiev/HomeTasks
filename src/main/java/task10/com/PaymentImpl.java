@@ -33,10 +33,38 @@ public class PaymentImpl implements Payment {
         return false;
     }
 
+    public double getGoodAmountByTitle(String title) {
+        Good good=goods.get(title);
+        if(good!=null) {
+            return good.getAmount();
+        }
+        return 0.;
+    }
+
+    public double getGoodPriceByTitle(String title) {
+        Good good=goods.get(title);
+        if(good!=null) {
+            return good.getPrice();
+        }
+        return 0.;
+    }
+
+    public int getUniqueGoodsAmount() {
+        return goods.size();
+    }
+
+    public int getAllGoodsAmount() {
+        int result=0;
+        for(Map.Entry<String,Good> entry:goods.entrySet()){
+            result +=entry.getValue().getAmount();
+        }
+        return result;
+    }
+
     public double getSummaryPrice() {
         double result=0.;
         for(Map.Entry<String,Good> entry:goods.entrySet()){
-            result+=entry.getValue().price;
+            result+=entry.getValue().getPrice()*entry.getValue().getAmount();
         }
         return result;
     }
@@ -53,7 +81,9 @@ public class PaymentImpl implements Payment {
         return result.toString();
     }
 
-
+    /**
+     * Inner helper class
+     */
     class Good{
         double amount;
         double price;

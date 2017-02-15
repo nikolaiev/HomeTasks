@@ -10,6 +10,8 @@ public class Triangle extends Shape{
     List<Point> points=new ArrayList<Point>(3);
 
     public Triangle(List<Point> points) {
+        if(points.size()!=3)
+            throw new IllegalArgumentException();
         this.points = points;
     }
 
@@ -18,14 +20,17 @@ public class Triangle extends Shape{
     }
 
     public void setPoints(List<Point> points) {
+        if(points.size()!=3)
+            throw new IllegalArgumentException();
         this.points = points;
     }
 
+    @Override
     public double getSquare() {
         double sideOne=getSideLength(0,1);
         double sideTwo=getSideLength(1,2);
         double sideThree=getSideLength(0,2);
-        /*half perimetr*/
+        /*half perimeter*/
         double p=(sideOne+sideThree+sideTwo)/2;
         /*Heron's formula*/
         return  Math.sqrt(p*(p-sideOne)*(p-sideTwo)*(p-sideThree));

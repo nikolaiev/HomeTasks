@@ -32,10 +32,11 @@ public class Automobile implements AutoInterface {
      * @param wheelDiameter
      */
     private void initWheels(int wheelsAmount, double wheelDiameter) {
-        if (!(wheelsAmount > 3 && wheelsAmount < 18))
-            return;
-        this.wheels = new ArrayList<Wheel>(wheelsAmount);
-        for (int i = 0; i < wheelsAmount; i++) {
+        int realWheelsAmount=4;
+        if (wheelsAmount > 3 && wheelsAmount < 18 && wheelsAmount%2==0)
+            realWheelsAmount=wheelsAmount;
+        this.wheels = new ArrayList<Wheel>(realWheelsAmount);
+        for (int i = 0; i < realWheelsAmount; i++) {
             this.wheels.add(new Wheel(wheelDiameter));
         }
     }
@@ -69,7 +70,10 @@ public class Automobile implements AutoInterface {
 
     public void changeWheel(int index, Wheel wheel) {
         if (wheel == null)
-            throw new IllegalArgumentException("Wheel object was not created!");
+            throw new IllegalArgumentException();
+        if(index>wheels.size())
+            throw new IndexOutOfBoundsException();
+
         this.wheels.set(index, wheel);
     }
 

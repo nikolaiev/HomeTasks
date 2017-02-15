@@ -10,6 +10,7 @@ public interface MyLinkedList<T> {
 
     void set(int index,T elem);
     void setFirst(T elem);
+    void setLast(T i);
 
     void add(T elem);
     void add(int index,T elem);
@@ -19,4 +20,6 @@ public interface MyLinkedList<T> {
     boolean removeLast();
     boolean removeFirst();
     boolean remove(T elem);
+
+    int getSize();
 }
