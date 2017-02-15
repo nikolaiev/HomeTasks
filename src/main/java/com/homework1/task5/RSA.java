@@ -14,7 +14,7 @@ public class RSA {
     private BigInteger openExponent;    //open exponent value
     private BigInteger closedExponent;  //closed (secret) exponent value
 
-
+    /*factory methods*/
     public static RSA getRSA(){
         return getRSA(1024);
     }
