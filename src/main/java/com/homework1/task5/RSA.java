@@ -14,12 +14,39 @@ public class RSA {
     private BigInteger openExponent;    //open exponent value
     private BigInteger closedExponent;  //closed (secret) exponent value
 
-    /**
-     * Build fully functional object with default values
-     */
-    public RSA(){
-        this(1024);
+
+    public static RSA getRSA(){
+        return getRSA(1024);
     }
+
+    public static RSA getRSA(BigInteger openExponent,BigInteger module){
+        return new RSA(openExponent,module);
+    }
+
+    public static RSA getRSA(int bitlen){
+        BigInteger keys[]=getSimpleKeyPair(bitlen);
+
+        BigInteger primeNum1=keys[0];
+        BigInteger primeNum2=keys[1];
+
+        BigInteger module=primeNum1.multiply(primeNum2);
+
+        /*getting eiler value*/
+        BigInteger eulerVal=(primeNum1.subtract(BigInteger.ONE))
+                .multiply(primeNum2.subtract(BigInteger.ONE));
+        /*set open exponent*/
+        BigInteger openExponent=BigInteger.valueOf(3);
+
+        /*Euler function value*/
+        while (eulerVal.gcd(openExponent).intValue() > 1) {
+            openExponent = openExponent.add(new BigInteger("2"));
+        }
+
+        BigInteger closedExponent =openExponent.modInverse(eulerVal);
+
+        return new RSA(module,openExponent,closedExponent);
+    }
+
 
     /**
      *Constructor to build object, that allowed only to
@@ -27,48 +54,21 @@ public class RSA {
      * @param openExponent  open exponent (public key part)
      * @param module        module value (public key part)
      */
-    public RSA(BigInteger openExponent,BigInteger module){
+    private RSA(BigInteger openExponent,BigInteger module){
         this.openExponent=openExponent;
         this.module=module;
     }
 
     /**
-     * Constructor to create fully functional object
-     * @param bitlen    secret primes numbers bit letgth
+     *
      */
-    public RSA(int bitlen){
-        //TODO refactor
-        setExponentsKeyPair(bitlen);
+    private RSA(BigInteger module,BigInteger  openExponent,BigInteger  closedExponent){
+        this.module=module;
+        this.openExponent=openExponent;
+        this.closedExponent=closedExponent;
     }
 
-    private void setExponentsKeyPair(int bitlen){
-        /*factory method*/
-        BigInteger keys[]=getSimpleKeyPair(bitlen);
-
-        setExponents(keys);
-    }
-
-    private void setExponents(BigInteger [] keys){
-        BigInteger primeNum1=keys[0];
-        BigInteger primeNum2=keys[1];
-
-        module=primeNum1.multiply(primeNum2);
-
-        /*getting eiler value*/
-        BigInteger eulerVal=(primeNum1.subtract(BigInteger.ONE))
-                .multiply(primeNum2.subtract(BigInteger.ONE));
-        /*set open exponent*/
-        openExponent=BigInteger.valueOf(3);
-
-        /*Euler function value*/
-        while (eulerVal.gcd(openExponent).intValue() > 1) {
-            openExponent = openExponent.add(new BigInteger("2"));
-        }
-
-        closedExponent =openExponent.modInverse(eulerVal);
-    }
-
-    private BigInteger[] getSimpleKeyPair (int bitlen){
+    private static BigInteger[] getSimpleKeyPair (int bitlen){
         SecureRandom secureRandom=new SecureRandom();
         /*secret prime numbers*/
         BigInteger primeNum1=new BigInteger(bitlen,100,secureRandom);

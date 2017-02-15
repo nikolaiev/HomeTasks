@@ -25,7 +25,7 @@ public class RSATest {
 
     @Before
     public void init(){
-        rsa=new RSA();
+        rsa=RSA.getRSA();
     }
 
     @Rule
@@ -43,7 +43,7 @@ public class RSATest {
     public void decrypt() throws Exception {
 
         /*create encrypt only RSA object*/
-        RSA rsaConfigured=new RSA(rsa.getOpenExponent(),rsa.getModule());
+        RSA rsaConfigured=RSA.getRSA(rsa.getOpenExponent(),rsa.getModule());
 
         String test=rsaConfigured.encrypt(input);
         /*decrypt with another RSA object*/
@@ -56,7 +56,7 @@ public class RSATest {
     public void  decryptError() throws UnsupportedOperationException {
 
         /*create encrypt only RSA object*/
-        RSA rsaConfigured=new RSA(rsa.getOpenExponent(),rsa.getModule());
+        RSA rsaConfigured=RSA.getRSA(rsa.getOpenExponent(),rsa.getModule());
 
         /*waiting for exception*/
         thrown.expect(UnsupportedOperationException.class);
@@ -81,21 +81,6 @@ public class RSATest {
         getSimpleKeyPair.setAccessible(true);
         BigInteger keys[]= (BigInteger[]) getSimpleKeyPair.invoke(rsa,1024);
         assert(keys[0].gcd(keys[1]).equals(BigInteger.ONE));
-    }
-
-    @Test
-    public void setExponents() throws Exception {
-        Method setExponents = RSA.class.getDeclaredMethod("setExponents",
-                int.class);
-        /*Method setExponents = RSA.class.getDeclaredMethod("setExponents",
-                BigInteger[].class);*/
-        setExponents.setAccessible(true);
-
-        BigInteger[] testKeys=new BigInteger[]{BigInteger.valueOf(7),BigInteger.valueOf(3)};
-        Object invoke = setExponents.invoke(rsa, new Object[]{testKeys});
-        assertEquals(BigInteger.valueOf(21),rsa.getModule());
-        assertEquals(BigInteger.valueOf(5),rsa.getOpenExponent());
-
     }
 
 }
