@@ -1,5 +1,7 @@
 package task8.com;
 
+import java.io.ObjectInputStream;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -7,11 +9,10 @@ import java.util.LinkedList;
  * Created by vlad on 14.02.17.
  */
 
-public class MyListImpl<T> implements MyList<T>{
+public class MyListImpl<T> implements MyList<T>,Iterable<T>{
     Node<T> first;
     Node<T> last;
     int size = 0;
-
 
     public MyListImpl() {
     }
@@ -63,17 +64,22 @@ public class MyListImpl<T> implements MyList<T>{
         size--;
     }
 
-    public void remove(T elem) {
+    /*public void remove(T elem) {
         int index=0;
+
+        if(first==null)
+            return;
         Node<T> currNode=first;
-        while(currNode.next!=null){
-            if(currNode.next.item.equals(elem)){
-                currNode.next=currNode.next.next;
+        //TODO rewrite
+        do{
+            if(currNode.item.equals(elem)){
+                currNode=currNode.next;
                 size--;
                 break;
             }
-        }
-    }
+            currNode=currNode.next;
+        }while(currNode!=null);
+    }*/
 
     public T get(int index) {
         checkPositionIndex(index);
@@ -82,6 +88,20 @@ public class MyListImpl<T> implements MyList<T>{
             x = x.next;
         return x.item;
 
+    }
+
+    public T getFirst(){
+        if(first!=null)
+            return first.item;
+        else
+            return null;
+    }
+
+    public T getLast(){
+        if(last!=null)
+            return last.item;
+        else
+            return null;
     }
 
     public void set(int index, T elem) {
@@ -112,6 +132,43 @@ public class MyListImpl<T> implements MyList<T>{
             currNode=currNode.next;
         }
         return copy;
+    }
+
+    public Iterator<T> iterator()
+    {
+        return new IteratorTest();
+    }
+
+    private class IteratorTest implements Iterator<T>
+    {
+        int index=0;
+
+        public boolean hasNext(){return size>index;}
+
+        public T next(){
+            return get(index++);
+        }
+
+        public void remove(){
+            MyListImpl.this.remove(index);
+        }
+    }
+
+    @Override
+    public String toString(){
+        Iterator<T> it = iterator();
+        if (! it.hasNext())
+            return "[]";
+
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (;;) {
+            T e = it.next();
+            sb.append(e == this ? "(this Collection)" : e);
+            if (! it.hasNext())
+                return sb.append(']').toString();
+            sb.append(',').append(' ');
+        }
     }
 
     private static class Node<T> {

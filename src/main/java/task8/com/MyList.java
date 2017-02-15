@@ -10,7 +10,7 @@ public interface MyList<T> extends Cloneable{
 
     void remove(int index);
 
-    void remove(T elem);
+    //void remove(T elem);
 
     T get(int index);
 
