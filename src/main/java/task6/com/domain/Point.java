@@ -2,6 +2,7 @@ package task6.com.domain;
 
 /**
  * Created by vlad on 14.02.17.
+ * Point class
  */
 public class Point {
     double x;
@@ -12,9 +13,7 @@ public class Point {
         this.y = y;
     }
 
-    public double getX() {
-        return x;
-    }
+    public double getX() {return x;}
 
     public void setX(double x) {
         this.x = x;

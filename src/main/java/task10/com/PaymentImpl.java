@@ -53,14 +53,23 @@ public class PaymentImpl implements Payment {
         return goods.size();
     }
 
+    /**
+     * return total goods amount
+     * @return
+     */
     public int getAllGoodsAmount() {
         int result=0;
+
         for(Map.Entry<String,Good> entry:goods.entrySet()){
             result +=entry.getValue().getAmount();
         }
         return result;
     }
 
+    /**
+     * get total goods price
+     * @return
+     */
     public double getSummaryPrice() {
         double result=0.;
         for(Map.Entry<String,Good> entry:goods.entrySet()){
@@ -69,6 +78,10 @@ public class PaymentImpl implements Payment {
         return result;
     }
 
+    /**
+     * String representation
+     * @return
+     */
     public String getGoodsList() {
         StringBuilder result=new StringBuilder();
         for(Map.Entry<String,Good> entry:goods.entrySet()){
