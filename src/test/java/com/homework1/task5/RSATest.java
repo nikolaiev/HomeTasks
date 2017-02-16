@@ -83,6 +83,7 @@ public class RSATest {
         assert(keys[0].gcd(keys[1]).equals(BigInteger.ONE));
     }
 
+    /*factory methods exception expected*/
     @Test(expected = IllegalArgumentException.class)
     public void getRSAException(){
         rsa.getRSA(null,null);
