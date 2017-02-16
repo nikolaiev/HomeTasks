@@ -1,5 +1,7 @@
 package task9.com;
 
+import java.util.Iterator;
+
 /**
  * Created by vlad on 15.02.17.
  */
@@ -20,6 +22,7 @@ public interface MyLinkedList<T> {
     boolean removeLast();
     boolean removeFirst();
     boolean remove(T elem);
+    Iterator<T> iterator();
 
     int getSize();
 }

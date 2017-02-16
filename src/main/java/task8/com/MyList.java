@@ -1,5 +1,7 @@
 package task8.com;
 
+import java.util.Iterator;
+
 /**
  * Created by vlad on 14.02.17.
  */
@@ -19,6 +21,7 @@ public interface MyList<T> {
     T getLast();
 
     void set(int index, T elem);
+    Iterator<T> iterator();
 
     int getSize();
 }
