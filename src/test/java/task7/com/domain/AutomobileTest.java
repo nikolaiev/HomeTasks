@@ -33,10 +33,7 @@ public class AutomobileTest {
 
     }
 
-    @Test
-    public void changeWheel() throws Exception {
 
-    }
 
     @Test(expected = IllegalArgumentException.class)
     public void changeWheelException() throws Exception {

@@ -21,6 +21,7 @@ public interface MyList<T> {
     T getLast();
 
     void set(int index, T elem);
+
     Iterator<T> iterator();
 
     int getSize();

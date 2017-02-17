@@ -32,9 +32,8 @@ public class Automobile implements AutoInterface {
      * @param wheelDiameter
      */
     private void initWheels(int wheelsAmount, double wheelDiameter) {
-        int realWheelsAmount=4;
-        if (wheelsAmount > 3 && wheelsAmount < 18 && wheelsAmount%2==0)
-            realWheelsAmount=wheelsAmount;
+        int realWheelsAmount=wheelsAmount;
+
         this.wheels = new ArrayList<Wheel>(realWheelsAmount);
         for (int i = 0; i < realWheelsAmount; i++) {
             this.wheels.add(new Wheel(wheelDiameter));
