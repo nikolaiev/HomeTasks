@@ -8,13 +8,14 @@ import java.util.Map;
  */
 public class PropertyFactory {
     //standard prices
-    Map<PropertyType,Double> prices =new HashMap<PropertyType, Double>();;
+    Map<PropertyType,Double> prices =new HashMap<PropertyType, Double>();
 
     //standard prices
     {
         prices = new HashMap<PropertyType, Double>();
         prices.put(PropertyType.HERB, 0.5);
         prices.put(PropertyType.TAPE, 1.);
+        prices.put(PropertyType.WRAPPER, 12.);
     }
     /**
      * Empty Constructor

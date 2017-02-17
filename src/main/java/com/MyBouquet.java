@@ -11,8 +11,8 @@ import java.util.List;
  * Created by vlad on 17.02.17.
  */
 public class MyBouquet implements Bouquet {
-    List<Flower> flowers=new ArrayList<Flower>();;
-    List<Property> properties=new ArrayList<Property>();;
+    List<Flower> flowers=new ArrayList<Flower>();
+    List<Property> properties=new ArrayList<Property>();
 
     /**
      * Empty constructor
@@ -73,29 +73,26 @@ public class MyBouquet implements Bouquet {
         if(property==null)
             throw new IllegalArgumentException();
 
-        int counter=0;
+
+        int count=0;
 
         for(Property property1:properties){
             if(property1.getClass()==property.getClass()){
-                counter++;
+                count++;
             }
         }
         //if max limit reached
-        if(counter==property.getMaxCount()){
+        if(count==property.getMaxCount()){
             return;
         }
         this.properties.add(property);
     }
 
     public void removeFlower(Flower flower) {
-        if(flower==null)
-            throw new IllegalArgumentException();
         this.flowers.remove(flower);
     }
 
     public void removeProperty(Property property) {
-        if(property==null)
-            throw new IllegalArgumentException();
         this.properties.remove(property);
     }
 

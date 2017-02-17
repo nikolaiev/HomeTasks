@@ -81,17 +81,6 @@ public class FlowerFactory {
         return createFlower(flowerType,stemLength,price,new Date());
     }
 
-    /**
-     * User wants to use standart price
-     * @param flowerType
-     * @param stemLength
-     * @return
-     */
-    public Flower createFlower(FlowerType flowerType, double stemLength){
-
-        return createFlower(flowerType,stemLength,new Date());
-    }
-
     public Flower createFlower(FlowerType flowerType, double stemLength, Date date){
         double price;
 
@@ -101,5 +90,16 @@ public class FlowerFactory {
             throw new IllegalArgumentException();
 
         return createFlower(flowerType,stemLength,price,date);
+    }
+
+    /**
+     * User wants to use standart price
+     * @param flowerType
+     * @param stemLength
+     * @return
+     */
+    public Flower createFlower(FlowerType flowerType, double stemLength){
+
+        return createFlower(flowerType,stemLength,new Date());
     }
 }
