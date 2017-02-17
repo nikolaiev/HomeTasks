@@ -4,21 +4,20 @@ import com.flower.Flower;
 import com.property.Property;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by vlad on 17.02.17.
  */
-public class MyFlavor implements Flavor{
+public class MyBouquet implements Bouquet {
     List<Flower> flowers=new ArrayList<Flower>();;
     List<Property> properties=new ArrayList<Property>();;
 
     /**
      * Empty constructor
      */
-    public MyFlavor() {
+    public MyBouquet() {
     }
 
     /**
@@ -73,6 +72,18 @@ public class MyFlavor implements Flavor{
     public void addProperty(Property property) {
         if(property==null)
             throw new IllegalArgumentException();
+
+        int counter=0;
+
+        for(Property property1:properties){
+            if(property1.getClass()==property.getClass()){
+                counter++;
+            }
+        }
+        //if max limit reached
+        if(counter==property.getMaxCount()){
+            return;
+        }
         this.properties.add(property);
     }
 
@@ -95,4 +106,5 @@ public class MyFlavor implements Flavor{
     public List<Property> getProperties() {
         return properties;
     }
+
 }

@@ -88,6 +88,11 @@ public class FlowerFactory {
      * @return
      */
     public Flower createFlower(FlowerType flowerType, double stemLength){
+
+        return createFlower(flowerType,stemLength,new Date());
+    }
+
+    public Flower createFlower(FlowerType flowerType, double stemLength, Date date){
         double price;
 
         if(prices.containsKey(flowerType))
@@ -95,6 +100,6 @@ public class FlowerFactory {
         else
             throw new IllegalArgumentException();
 
-        return createFlower(flowerType,stemLength,price,new Date());
+        return createFlower(flowerType,stemLength,price,date);
     }
 }

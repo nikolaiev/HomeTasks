@@ -1,5 +1,6 @@
 package com.flower;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -48,6 +49,12 @@ public abstract class Flower implements Comparable<Flower>{
 
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public String toString(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        return "\n"+this.getClass()+" "+sdf.format(this.getCutDate())+" stem : "+stemLength;
     }
 
     @Override

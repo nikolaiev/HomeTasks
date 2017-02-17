@@ -3,22 +3,41 @@ package com;
 import com.flower.Flower;
 import com.flower.FlowerFactory;
 import com.flower.FlowerType;
+import com.property.PropertyFactory;
+import com.property.PropertyType;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by vlad on 17.02.17.
  */
 public class Florist {
-    public static void main(String[] args) {
-        Flavor flavor=new MyFlavor();
+    public static void main(String[] args) throws ParseException {
+        Bouquet bouquet =new MyBouquet();
         FlowerFactory flowerFactory=new FlowerFactory();
-        Flower flower=flowerFactory.createFlower(FlowerType.CHAMOMILE,10.);
-        flavor.addFlower(flower);
-        Flower flowerToRemove=flowerFactory.createFlower(FlowerType.LILAC,2.,11.);
-        flavor.addFlower(flowerToRemove);
-        flavor.addFlower(flower);
-        System.out.println(flavor.getPrice());
-        flavor.removeFlower(flowerToRemove);
-        flavor.removeFlower(flowerToRemove);
-        System.out.println(flavor.getPrice());
+        PropertyFactory propertyFactory=new PropertyFactory();
+
+        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy/MM/dd");
+
+        bouquet.addFlower(flowerFactory.createFlower(FlowerType.LILAC,2));
+        bouquet.addFlower(flowerFactory.createFlower(FlowerType.TULIP,5,2,simpleDateFormat.parse("2010/02/12")));
+        bouquet.addFlower(flowerFactory.createFlower(FlowerType.ROSE,10));
+
+        bouquet.addProperty(propertyFactory.createProperty(PropertyType.HERB));
+        bouquet.addProperty(propertyFactory.createProperty(PropertyType.HERB,20));
+        bouquet.addProperty(propertyFactory.createProperty(PropertyType.TAPE,40));
+        bouquet.addProperty(propertyFactory.createProperty(PropertyType.TAPE,40));
+        bouquet.addProperty(propertyFactory.createProperty(PropertyType.WRAPPER,40));
+        bouquet.addProperty(propertyFactory.createProperty(PropertyType.WRAPPER,40));
+
+        System.out.println(bouquet.getPrice());
+        System.out.println(bouquet.getFlowers());
+        bouquet.sortFlowers();
+        System.out.println(bouquet.getFlowers());
+        System.out.println(bouquet.findStemRange(0,10));
+
+
     }
 }
