@@ -7,6 +7,7 @@ import java.util.Date;
  */
 public class Tulip extends Flower {
     private boolean isLeavesCut=false;
+
     public Tulip(Date cutDate, double stemLength, double price) {
         super(cutDate, stemLength, price);
     }

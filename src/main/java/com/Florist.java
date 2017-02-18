@@ -1,8 +1,6 @@
 package com;
 
-import com.flower.Flower;
-import com.flower.FlowerFactory;
-import com.flower.FlowerType;
+import com.flower.*;
 import com.property.PropertyFactory;
 import com.property.PropertyType;
 
@@ -21,6 +19,13 @@ public class Florist {
         PropertyFactory propertyFactory=new PropertyFactory();
 
         SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy/MM/dd");
+
+        /*Rose example*/
+        Rose rose=(Rose)flowerFactory.createFlower(FlowerType.ROSE,10);
+
+        /*crop spikes*/
+        if(!rose.isSpikesCropped())
+            rose.cropSpikes();
 
         bouquet.addFlower(flowerFactory.createFlower(FlowerType.LILAC,2));
         bouquet.addFlower(flowerFactory.createFlower(FlowerType.TULIP,5,2,simpleDateFormat.parse("2010/02/12")));

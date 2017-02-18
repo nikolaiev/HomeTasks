@@ -8,8 +8,6 @@ import java.util.Date;
 public class Rose extends Flower {
     private boolean isSpikesCropped=false;
 
-
-
     public Rose(Date cutDate, double stemLength, double price) {
         super(cutDate, stemLength, price);
     }
@@ -22,7 +20,7 @@ public class Rose extends Flower {
         return isSpikesCropped;
     }
 
-    public void croppSpikes() {
+    public void cropSpikes() {
         isSpikesCropped = true;
     }
 }
