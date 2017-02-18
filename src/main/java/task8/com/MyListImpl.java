@@ -1,6 +1,7 @@
 package task8.com;
 
 import java.io.ObjectInputStream;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -14,6 +15,7 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
     Node<T> first;
     Node<T> last;
     int size = 0;
+    int modCount=0;//count of modifications
 
     /**
      * Empty constructor
@@ -32,6 +34,7 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
         }
 
         size++;
+        modCount++;
     }
 
     public void add(T elem, int index) {
@@ -48,6 +51,7 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
             /*insert new Node*/
             currNode.next = new Node<T>(elem, currNode.next);
             size++;
+            modCount++;
         }
     }
 
@@ -58,6 +62,7 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
         if(index==0){
             first=first.next;
             size--;
+            modCount++;
             return;
         }
 
@@ -72,6 +77,7 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
         Node<T> removableNode=prevNode.next;
         prevNode.next=removableNode.next;
         size--;
+        modCount++;
     }
 
 
@@ -129,17 +135,26 @@ public class MyListImpl<T> implements MyList<T>,Iterable<T>{
     private class IteratorTest implements Iterator<T>
     {
         int index=0;
+        int expectedModCount=MyListImpl.this.modCount;
 
         public boolean hasNext(){return size>index;}
 
         public T next(){
+            checkForComodification();
             if(!hasNext())
                 throw new NoSuchElementException();
             return get(index++);
         }
 
         public void remove(){
-            MyListImpl.this.remove(index);
+            MyListImpl.this.remove(--index);
+            expectedModCount++;
+        }
+
+        void checkForComodification(){
+            if(modCount!=expectedModCount){
+                throw new ConcurrentModificationException();
+            }
         }
     }
 

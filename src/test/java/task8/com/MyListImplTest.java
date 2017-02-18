@@ -2,6 +2,7 @@ package task8.com;
 
 import org.junit.Test;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -133,6 +134,42 @@ public class MyListImplTest {
         Iterator<Integer> myListIterator=myList.iterator();
         while (true){
             myListIterator.next();
+        }
+    }
+
+    /*concurrent modification exception test*/
+    @Test
+    public void concurrentModExceptionNotThrown(){
+        myList.add(2);
+        myList.add(1);
+        myList.add(5);
+        myList.add(3);
+
+        Iterator<Integer> iterator=myList.iterator();
+
+        Integer element;
+
+        while (iterator.hasNext()){
+            element=iterator.next();
+            System.out.println(element);
+            iterator.remove();
+        }
+    }
+    @Test(expected = ConcurrentModificationException.class)
+    public void concurrentModException(){
+        myList.add(2);
+        myList.add(1);
+        myList.add(5);
+        myList.add(3);
+
+        Iterator<Integer> iterator=myList.iterator();
+
+        Integer element;
+
+        while (iterator.hasNext()){
+            element=iterator.next();
+            myList.add(123);
+            System.out.println(element);
         }
     }
 }
