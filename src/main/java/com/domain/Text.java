@@ -8,14 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import com.factory.SymbolFactory;
 
 /**
  * Created by vlad on 19.02.17.
  */
 public class Text {
     List<Sentence> sentences;
-
+    SymbolFactory symbolFactory=SymbolFactory.getInstance();
     public Text(List<Sentence> sentences){
         this.sentences=sentences;
     }
