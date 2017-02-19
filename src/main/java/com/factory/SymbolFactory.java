@@ -32,10 +32,10 @@ public class SymbolFactory {
         if(symbol==null){
             Symbol newSymbol;
             /*check if punctuation symbol*/
-            if(ch!='.'&&ch!=','&&ch!='!'&&ch!='?')
-                newSymbol=new LetterSymbol(ch);
-            else
+            if((""+ch).matches("[^а-яА-Яa-zA-Z0-9-]"))
                 newSymbol=new PunctuationSymbol(ch);
+            else
+                newSymbol=new LetterSymbol(ch);
 
             //adding to DB
             symbolsDB.add(newSymbol);

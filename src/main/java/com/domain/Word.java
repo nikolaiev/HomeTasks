@@ -33,4 +33,19 @@ public class Word implements SentenceItem{
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Word word = (Word) o;
+
+        return symbols != null ? symbols.equals(word.symbols) : word.symbols == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return symbols != null ? symbols.hashCode() : 0;
+    }
 }

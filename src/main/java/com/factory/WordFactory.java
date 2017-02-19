@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.domain.LetterSymbol;
+import com.domain.Symbol;
+import com.domain.Word;
 
 /**
  * Created by vlad on 19.02.17.
@@ -14,36 +16,27 @@ import com.domain.LetterSymbol;
 public class WordFactory{
     private static WordFactory instance = new WordFactory();
     public static WordFactory getInstance(){return instance;}
-    private static List<LetterSymbol> symbols=new LinkedList<>();
 
-    public List<LetterSymbol> getWord(String word){
+    private static List<Word> wordsDB=new LinkedList<>();
 
-        List<LetterSymbol> myCharacters = new ArrayList<>();
+
+    public static Word getWord(String word){
+
+        List<LetterSymbol> myWordSymbols = new ArrayList<>();
 
         for(char ch : word.toCharArray()){
-
-            LetterSymbol symbol = null;
-
-            for(LetterSymbol mc : symbols){
-
-                if(mc.getSymbol() == ch){
-                    symbol = mc;
-                    break;
-                }
-            }
-
-            if(symbol == null){
-                LetterSymbol newLetter=new LetterSymbol(ch);
-
-                symbols.add(newLetter);//adding to factory DB
-
-                myCharacters.add(newLetter);
-
-            } else {
-                myCharacters.add(symbol);
-            }
+            Symbol symbol=SymbolFactory.getSymbol(ch);
+            myWordSymbols.add((LetterSymbol) symbol);
         }
 
-        return myCharacters;
+        Word myWord=new Word(myWordSymbols);
+
+        if(wordsDB.contains(myWord)){
+            return wordsDB.get(wordsDB.indexOf(myWord));
+        }
+        else {
+            wordsDB.add(myWord);
+            return myWord;
+        }
     }
 }

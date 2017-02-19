@@ -8,17 +8,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import com.factory.SymbolFactory;
+import com.factory.*;
 
 /**
  * Created by vlad on 19.02.17.
  */
 public class Text {
     List<Sentence> sentences;
-    SymbolFactory symbolFactory=SymbolFactory.getInstance();
-    public Text(List<Sentence> sentences){
-        this.sentences=sentences;
-    }
 
     public Text(String fileName) throws IOException {
         sentences=new LinkedList<>();
@@ -31,10 +27,11 @@ public class Text {
                             Arrays.stream(str.replaceAll("([^а-яА-Яa-zA-Z0-9-])", " $1 ")
                                     .split("[\\s\r\t\n]+"))
                             .map(item->{
-                                if(item.matches("[^а-яА-Яa-zA-Z0-9-]"))
-                                    return new PunctuationSymbol(item.toCharArray()[0]);
-
-                                return new Word(item);
+                                if(item.matches("[^а-яА-Яa-zA-Z0-9-]")) {
+                                    return (PunctuationSymbol) SymbolFactory.getSymbol(item.toCharArray()[0]);
+                                }
+                                //else
+                                return WordFactory.getWord(item);
                             }).collect(Collectors.toList())
 
                     )//map
