@@ -34,6 +34,7 @@ public class Word implements SentenceItem{
         return sb.toString();
     }
 
+    //used in Word Factory
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

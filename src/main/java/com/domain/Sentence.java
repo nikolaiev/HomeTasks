@@ -23,7 +23,7 @@ public class Sentence {
         int iteration=0;
 
         for(SentenceItem item:items){
-            if(item.equals(word))
+            if(item==word)//can be link be link compared!
                 iteration++;
         }
         return iteration;
