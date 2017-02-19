@@ -1,25 +1,25 @@
 package com.factory;
 
-import com.domain.LetterSymbol;
 import com.domain.PunctuationSymbol;
 import com.domain.Symbol;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by vlad on 19.02.17.
+ * Implements FlyWeight pattern
  */
 public class SymbolFactory {
     private static SymbolFactory instance=new SymbolFactory();
-    public static SymbolFactory getInstance(){return instance;};
+    private static List<Symbol> symbolsDB=new LinkedList<>();
 
-    private static List<Symbol> symbolsDB=new ArrayList<>();
+    private SymbolFactory(){}
 
-    private SymbolFactory(){};
+    public static SymbolFactory getInstance(){return instance;}
 
 
-    public static Symbol getSymbol(char ch){
+    public Symbol getSymbol(char ch){
         Symbol symbol=null;
 
         for(Symbol sym:symbolsDB){
@@ -32,10 +32,10 @@ public class SymbolFactory {
         if(symbol==null){
             Symbol newSymbol;
             /*check if punctuation symbol*/
-            if((""+ch).matches("[^а-яА-Яa-zA-Z0-9-]"))
+            if((Character.toString(ch)).matches("[^а-яА-Яa-zA-Z0-9-]"))
                 newSymbol=new PunctuationSymbol(ch);
             else
-                newSymbol=new LetterSymbol(ch);
+                newSymbol=new Symbol(ch);
 
             //adding to DB
             symbolsDB.add(newSymbol);

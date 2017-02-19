@@ -10,9 +10,9 @@ import java.util.stream.Stream;
  * Created by vlad on 19.02.17.
  */
 public class Word implements SentenceItem{
-    List<LetterSymbol> symbols;
+    List<Symbol> symbols;
 
-    public Word(List<LetterSymbol> symbols){
+    public Word(List<Symbol> symbols){
         this.symbols=symbols;
     }
 
@@ -22,13 +22,13 @@ public class Word implements SentenceItem{
      */
     public Word(String word){
         symbols=new LinkedList<>();
-        word.chars().forEach(i-> {symbols.add(new LetterSymbol((char)i));});
+        word.chars().forEach(i-> {symbols.add(new Symbol((char)i));});
     }
 
     @Override
     public String toString() {
         StringBuilder sb=new StringBuilder();
-        for(LetterSymbol ls: symbols){
+        for(Symbol ls: symbols){
             sb.append(ls.getSymbol());
         }
         return sb.toString();

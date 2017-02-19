@@ -1,9 +1,8 @@
 package com.factory;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import com.domain.LetterSymbol;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import com.domain.Symbol;
 import com.domain.Word;
 
@@ -14,29 +13,57 @@ import com.domain.Word;
 
 
 public class WordFactory{
+    private SymbolFactory symbolFactory=SymbolFactory.getInstance();
     private static WordFactory instance = new WordFactory();
+    private static Map<Word,Integer> wordsDB=new HashMap<>();
+
+    private WordFactory(){}
+
     public static WordFactory getInstance(){return instance;}
 
-    private static List<Word> wordsDB=new LinkedList<>();
+    public Word getWord(String word){
 
-
-    public static Word getWord(String word){
-
-        List<LetterSymbol> myWordSymbols = new ArrayList<>();
+        List<Symbol> myWordSymbols = new ArrayList<>();
 
         for(char ch : word.toCharArray()){
-            Symbol symbol=SymbolFactory.getSymbol(ch);
-            myWordSymbols.add((LetterSymbol) symbol);
+            Symbol symbol=symbolFactory.getSymbol(ch);
+            myWordSymbols.add(symbol);
         }
 
         Word myWord=new Word(myWordSymbols);
 
-        if(wordsDB.contains(myWord)){
-            return wordsDB.get(wordsDB.indexOf(myWord));
+        if(wordsDB.containsKey(myWord)){
+            wordsDB.put(myWord,wordsDB.get(myWord)+1);//update counter
+
+            for(Word keyWord:wordsDB.keySet()){
+                if(keyWord.equals(myWord)){
+                    return keyWord;
+                }
+            }
+            //must not be here
+            return null;
         }
         else {
-            wordsDB.add(myWord);
+            wordsDB.put(myWord,1);
             return myWord;
         }
     }
+
+
+    public Map <Word,Integer>  getSortedWords(){
+        return getSortedMap(wordsDB);
+    }
+
+    private <K,V extends Comparable<? super V>> Map<K, V> getSortedMap(Map<K,V> map) {
+        return map.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
+    }
+
 }

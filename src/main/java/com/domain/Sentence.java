@@ -13,6 +13,21 @@ public class Sentence {
         this.items=items;
     }
 
+    /**
+     * Method to get word iterations amount in simple sentence
+     * @param word Word to check
+     * @return iteration count
+     */
+
+    public int getWordIteration(Word word){
+        int iteration=0;
+
+        for(SentenceItem item:items){
+            if(item.equals(word))
+                iteration++;
+        }
+        return iteration;
+    }
     @Override
     public String toString() {
         StringBuilder sb= new StringBuilder();
