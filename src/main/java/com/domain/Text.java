@@ -88,7 +88,7 @@ public class Text {
     }
 
     /*divided method to enable testing*/
-    private Map.Entry<Word,Integer> findMaxSentenceWords(Map<Word,Integer> words){
+    public Map.Entry<Word,Integer> findMaxSentenceWords(Map<Word,Integer> words){
         Word prevWord=null;
         int prevCount=0;
 

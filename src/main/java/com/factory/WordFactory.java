@@ -54,7 +54,7 @@ public class WordFactory{
         return getSortedMap(wordsDB);
     }
 
-    private <K,V extends Comparable<? super V>> Map<K, V> getSortedMap(Map<K,V> map) {
+    public <K,V extends Comparable<? super V>> Map<K, V> getSortedMap(Map<K,V> map) {
         return map.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))

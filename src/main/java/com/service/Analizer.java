@@ -15,8 +15,9 @@ public class Analizer {
         Text text=new Text("test2.txt");
 
         Map.Entry<Word,Integer> result=text.findMaxSentenceWords();
+
         System.out.println("Word : "+result.getKey());
-        System.out.println("In sentences : "+result.getValue()+" times");
+        System.out.println("Unique sentences : "+result.getValue());
 
     }
 }
