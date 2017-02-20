@@ -2,11 +2,10 @@ package com.factory;
 
 import com.domain.PunctuationSymbol;
 import com.domain.Symbol;
+import com.domain.SymbolFactory;
 import org.junit.Test;
 
 import java.util.Random;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by vlad on 19.02.17.

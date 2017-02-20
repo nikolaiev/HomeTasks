@@ -1,12 +1,10 @@
 package com.factory;
 
-import com.domain.Symbol;
 import com.domain.Word;
+import com.domain.WordFactory;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;

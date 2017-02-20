@@ -1,17 +1,12 @@
 package com.domain;
 
-import com.factory.SessionIdentifierGenerator;
-import com.factory.WordFactory;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.nio.file.NoSuchFileException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import static org.junit.Assert.*;
 

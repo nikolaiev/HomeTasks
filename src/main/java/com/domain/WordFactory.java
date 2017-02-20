@@ -1,10 +1,7 @@
-package com.factory;
+package com.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
-import com.domain.Symbol;
-import com.domain.Word;
 
 /**
  * Created by vlad on 19.02.17.

@@ -1,8 +1,6 @@
 package com.domain;
 
 import com.factory.SessionIdentifierGenerator;
-import com.factory.SymbolFactory;
-import com.factory.WordFactory;
 import org.junit.Test;
 
 import java.util.LinkedList;

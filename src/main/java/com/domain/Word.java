@@ -12,17 +12,8 @@ import java.util.stream.Stream;
 public class Word implements SentenceItem{
     List<Symbol> symbols;
 
-    public Word(List<Symbol> symbols){
+    Word(List<Symbol> symbols){
         this.symbols=symbols;
-    }
-
-    /**
-     * Creates word from string
-     * @param word
-     */
-    public Word(String word){
-        symbols=new LinkedList<>();
-        word.chars().forEach(i-> {symbols.add(new Symbol((char)i));});
     }
 
     @Override
