@@ -21,7 +21,7 @@ public class Text {
      * @throws IOException
      */
     public Text(String fileName) throws IOException {
-        sentences=new LinkedList<>();
+        sentences=new ArrayList<>();
         List<List<SentenceItem>> temp;
 
         //collecting SentenceItem list from file
