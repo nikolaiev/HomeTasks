@@ -3,8 +3,10 @@ package com.factory;
 import com.domain.PunctuationSymbol;
 import com.domain.Symbol;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by vlad on 19.02.17.
@@ -12,7 +14,7 @@ import java.util.List;
  */
 public class SymbolFactory {
     private static SymbolFactory instance=new SymbolFactory();
-    private static List<Symbol> symbolsDB=new LinkedList<>();
+    private static Set<Symbol> symbolsDB=new HashSet<>();
 
     private SymbolFactory(){}
 
