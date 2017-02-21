@@ -5,6 +5,7 @@ import com.domain.Word;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Random;
 
 
 /**
@@ -12,8 +13,7 @@ import java.util.Map;
  */
 public class Analizer {
     public static void main(String[] args) throws IOException {
-        System.out.println(~220);
-        Text text=new Text("test2.txt");
+         Text text=new Text("test2.txt");
 
         Map.Entry<Word,Integer> result=text.findMaxSentenceWords();
 
