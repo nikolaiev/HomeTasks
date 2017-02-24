@@ -76,7 +76,7 @@ public class QuickSortTest {
     public void testSpecial() {
         QuickSort.sort(numbers, (o1,o2)->{ return o2-o1;});
         printResult(numbers);
-        if (!validate(numbers)) {
+        if (!validateDes(numbers)) {
             fail("Should not happen");
         }
         //printResult(test);
@@ -119,6 +119,15 @@ public class QuickSortTest {
     private boolean validate(List<Integer> numbers) {
         for (int i = 0; i < numbers.size() - 1; i++) {
             if (numbers.get(i) > numbers.get(i+1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean validateDes(List<Integer> numbers) {
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            if (numbers.get(i) <= numbers.get(i+1)) {
                 return false;
             }
         }

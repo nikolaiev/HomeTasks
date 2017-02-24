@@ -34,15 +34,25 @@ public class MyFactoryTest {
     public void constructorException(){
         new MyFactory(-1);
     }
+
     @Test
     public void refNotNull() throws Exception {
+        Field refs=MyFactory.class.getDeclaredField("refs");
+        refs.setAccessible(true);
+
+        MyFactory myFactory=new MyFactory(OBJ_MAX_COUNT);
+
         @SuppressWarnings("unchecked")
         PhantomReference<MyObject> []refsFromObj=(PhantomReference<MyObject> []) refs.get(myFactory);
-        assertNotNull(refsFromObj[OBJ_MAX_COUNT-1]);
+        MyObject myObject=myFactory.getObject();
+
+
+        assertNotNull(refsFromObj[0]);
     }
 
     @Test
     public void queueIsEmpty() throws Exception {
+
         @SuppressWarnings("unchecked")
         //PhantomReference<MyObject> []refsFromObj=(PhantomReference<MyObject> []) refs.get(myFactory);
         ReferenceQueue<MyObject> qFromObj=(ReferenceQueue<MyObject>) queue.get(myFactory);
