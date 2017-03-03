@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class WordFactory{
     private SymbolFactory symbolFactory=SymbolFactory.getInstance();
     private static WordFactory instance = new WordFactory();
-    private static Map<Word,Integer> wordsDB=new HashMap<>();
+    private  Map<Word,Integer> wordsDB=new HashMap<>();
 
     private WordFactory(){}
 

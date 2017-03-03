@@ -102,14 +102,15 @@ public class Text {
             }
             //System.out.println(word+" "+countIteration);
 
+            //TODO
             if(prevWord!=null){
                 if(prevCount>=countIteration)//compare with prev unique entry iterations
                     return new MyEntry<>(prevWord,prevCount);
             }
-            else{
+            else
                 if(entry.getValue()==countIteration)//all iterations are unique
                     return entry;
-            }
+
             //else
             prevWord=word;
             prevCount=countIteration;
