@@ -7,27 +7,52 @@ import java.util.Set;
  * Created by vlad on 06.03.17.
  */
 public class MailDepartment {
+    /*Publish departments list*/
     Set<PunishmentDepartment> departmentList;
+    /*All known addresses(subscribers)*/
     Set<Subscriber> subscribers;
 
+    /**
+     * Constructor
+     */
     public MailDepartment() {
         this.departmentList = new HashSet<>();
+        this.subscribers=new HashSet<>();
     }
 
+    /**
+     * Add department to publish departments
+     * @param department depart to add
+     */
     public void addDepartment(PunishmentDepartment department){
         departmentList.add(department);
+        /*set Observer object to observable*/
         department.setMailDepartment(this);
     }
 
+    /**
+     * Add subscriber to addresses list
+     * @param subscriber item to add
+     */
     public void addSubscriber(Subscriber subscriber){
         subscribers.add(subscriber);
     }
 
-    public void sendMail(Mailing mailing) {
+    /**
+     * Observer method
+     * @param mailing observable item
+     */
+    public void sendMail(MailingItem mailing) {
         for(Subscriber subscriber:subscribers){
-            if(subscriber.getName()==mailing.getAdresserName()){
+            if(subscriber.getName()==mailing.getAddress()){
                 subscriber.getMailing(mailing);
+                System.out.println("Mail "+mailing.getTitle() +
+                "was sent to "+mailing.getAddress());
+                return;
             }
         }
+
+        System.out.println("Address " + mailing.getAddress() +
+                "was not found from mailing "+mailing.getTitle());
     }
 }

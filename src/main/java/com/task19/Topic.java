@@ -23,5 +23,6 @@ public abstract class Topic implements Cloneable {
     public String getDefaultText(){
         return defaultText;
     }
+
     public abstract Topic clone();
 }
