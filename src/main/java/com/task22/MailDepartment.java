@@ -47,6 +47,7 @@ public class MailDepartment {
      * @param mailing observable item
      */
     public void sendMail(MailingItem mailing) {
+
         for(Subscriber subscriber:subscribers){
             if(subscriber.getName().equals(mailing.getAddress())){
                 subscriber.getMailing(mailing);

@@ -31,15 +31,15 @@ public class BacteriumFactory {
         if(title==null || cellCount<2)
             throw new IllegalArgumentException();
         //else
-        MultiCellBacterium myBacterium=new MultiCellBacterium(title,cellCount);
-        if(multyCellBacterias.contains(myBacterium)){
-            for(MultiCellBacterium bacterium:multyCellBacterias){
-                if(myBacterium.equals(bacterium)){
-                    return bacterium;
-                }
+
+        for(MultiCellBacterium bacterium:multyCellBacterias){
+            if(bacterium.getTitle().equals(title) && bacterium.getCellCount()==cellCount ){
+                return bacterium;
             }
         }
+
         /*The bacterium is new*/
+        MultiCellBacterium myBacterium=new MultiCellBacterium(title,cellCount);
         multyCellBacterias.add(myBacterium);
         return myBacterium;
     }
@@ -66,16 +66,16 @@ public class BacteriumFactory {
             throw new IllegalArgumentException();
         //else
 
-        SingleCellBacterium myBacterium=new SingleCellBacterium(title,cellDiameter,isFlagellum);
 
-        if(singleCellBacterias.contains(myBacterium)){
+
             for(SingleCellBacterium bacterium:singleCellBacterias){
-                if(bacterium.equals(myBacterium)){
+                if(bacterium.getTitle().equals(title) && bacterium.getCellDiameter()==cellDiameter){
                     return bacterium;
                 }
             }
-        }
+
         /*The bacterium is new*/
+        SingleCellBacterium myBacterium=new SingleCellBacterium(title,cellDiameter,isFlagellum);
         singleCellBacterias.add(myBacterium);
         return myBacterium;
     }

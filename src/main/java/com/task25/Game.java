@@ -27,6 +27,7 @@ public class Game {
 
         Memento m=field.saveState();
         while (true){
+            field.draw();
             CellMarkType cellMarkType=
                     turnIndex==0?
                             CellMarkType.CROSS
@@ -35,6 +36,8 @@ public class Game {
 
             if(!makeRandomStep(cellMarkType,m))
                 turnIndex+=1;
+
+            field.draw();
 
             if(field.checkHasWon(cellMarkType)){
                 System.out.println("Game is over");

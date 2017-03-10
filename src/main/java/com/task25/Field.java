@@ -159,4 +159,25 @@ public class Field {
         }
         return true;
     }
+
+    public void draw() {
+        System.out.println();
+        for(int i=0;i<SIZE;i++){
+            for(int j=0;j<SIZE;j++){
+                if(cells[i][j].getCellMarkType()==CellMarkType.EMPTY)
+                    System.out.print(" .");
+                else
+                if(cells[i][j].getCellMarkType()==CellMarkType.CROSS){
+                    System.out.print(" X");
+
+                }
+                else
+                {
+                    System.out.print(" O");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }
