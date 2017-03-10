@@ -11,6 +11,10 @@ public final class Factory  extends  AbstractFactory{
 
     @Override
     public Film getFilm(Language language,FilmType filmType,String title) {
+        if(language==null || filmType ==null || title==null){
+            throw  new IllegalArgumentException();
+        }
+
         return new Film(language,filmType,title);
     }
 }

@@ -14,8 +14,7 @@ public class Grant {
      * Empty default constructor
      */
     public Grant() {
-        this.state = new Created(this) {
-        };
+        this.state = new Created(this);
     }
 
     public void setState(State state) {

@@ -25,7 +25,7 @@ public class MixStrategy implements Strategy{
      */
     public MixStrategy(SimpleStrategyType simpleStrategyType) {
         this();
-        this.prefSimpleStrategyType = simpleStrategyType;
+        this.setPrefSimpleStrategyType(simpleStrategyType);
     }
 
     /*getter prefSimpleStrategyType*/
@@ -34,6 +34,9 @@ public class MixStrategy implements Strategy{
     }
     /*setter prefSimpleStrategyType*/
     public void setPrefSimpleStrategyType(SimpleStrategyType prefSimpleStrategyType) {
+        if(prefSimpleStrategyType ==null)
+            throw new IllegalArgumentException();
+
         this.prefSimpleStrategyType = prefSimpleStrategyType;
     }
 
@@ -49,6 +52,8 @@ public class MixStrategy implements Strategy{
     }
 
     public void move(SimpleStrategyType type) {
+        if(type==null)
+            throw new IllegalArgumentException();
         switch (type){
             case FLY : flyingStrategy.move(); break;
             case FOOT : footStrategy.move(); break;

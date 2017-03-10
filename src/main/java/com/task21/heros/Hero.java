@@ -19,6 +19,10 @@ public abstract class Hero {
      * @param moveStrategy  moving strategy
      */
     public Hero(String name, Strategy moveStrategy) {
+        /*no memory leaks!*/
+        if(name==null || moveStrategy==null)
+            throw new IllegalArgumentException();
+
         this.name = name;
         this.moveStrategy = moveStrategy;
     }

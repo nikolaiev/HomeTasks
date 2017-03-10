@@ -15,7 +15,7 @@ public class NewsPaper extends MailingItem {
      * @param name       addresses' name
      * @param title      item's title
      */
-    public NewsPaper(PunishmentDepartment department, String name,String title) {
+    public NewsPaper(PublishDepartment department, String name, String title) {
         super(department, name,title);
         this.publishDate=new Date();
     }
@@ -27,7 +27,7 @@ public class NewsPaper extends MailingItem {
      * @param title      item's title
      * @param publishDate publish date
      */
-    public NewsPaper(PunishmentDepartment department,
+    public NewsPaper(PublishDepartment department,
                      String name,String title,Date publishDate) {
         super(department, name,title);
         this.publishDate=publishDate;
@@ -38,6 +38,8 @@ public class NewsPaper extends MailingItem {
     }
 
     public void setPublishDate(Date publishDate) {
+        if(publishDate==null)
+            throw new IllegalArgumentException();
         this.publishDate = publishDate;
     }
 }

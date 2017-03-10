@@ -15,7 +15,33 @@ public class PaymentFactoryTest {
 
     @Test
     public void getPayment() throws Exception {
+        Payment payment=PaymentFactory.getInstance()
+                .getPayment("test",100,Currency.EUR,PaymentType.INTRABANK);
 
+        assertNotNull(payment);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void getPaymentTitleExc() throws Exception {
+        Payment payment=PaymentFactory.getInstance()
+                .getPayment(null,100,Currency.EUR,PaymentType.INTRABANK);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getPaymentSumException() throws Exception {
+        Payment payment=PaymentFactory.getInstance()
+                .getPayment("test",1,Currency.EUR,PaymentType.INTRABANK);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getPaymentCurrencyException() throws Exception {
+        Payment payment=PaymentFactory.getInstance()
+                .getPayment("test",100,null,PaymentType.INTRABANK);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getPaymentPaymentTypeException() throws Exception {
+        Payment payment=PaymentFactory.getInstance()
+                .getPayment("test",100,Currency.EUR,null);
+    }
 }

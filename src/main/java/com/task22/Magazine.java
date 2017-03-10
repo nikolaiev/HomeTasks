@@ -12,9 +12,9 @@ public class Magazine extends MailingItem {
      * @param name       addresses's name
      * @param title       item's name
      */
-    public Magazine(PunishmentDepartment department, String name,String title) {
+    public Magazine(PublishDepartment department, String name, String title) {
         super(department, name,title);
-        this.theme=new String();
+        this.theme="";
     }
 
     /**
@@ -24,7 +24,7 @@ public class Magazine extends MailingItem {
      * @param title       item's name
      * @param theme      magazine's theme
      */
-    public Magazine(PunishmentDepartment department,
+    public Magazine(PublishDepartment department,
                     String name,String title,
                     String theme) {
         super(department, name,title);
@@ -36,6 +36,9 @@ public class Magazine extends MailingItem {
     }
 
     public void setTheme(String theme) {
+        if(theme==null){
+            throw new IllegalArgumentException();
+        }
         this.theme = theme;
     }
 

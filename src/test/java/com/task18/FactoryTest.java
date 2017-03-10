@@ -20,4 +20,20 @@ public class FactoryTest {
        assertNotNull(film);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void getFilmLangNull() throws Exception {
+        Film film=factory.getFilm(null,FilmType.COMEDY,"Mister Bin!");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getFilmTypeNull() throws Exception {
+        Film film=factory.getFilm(Language.ENG,null,"Mister Bin!");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getFilmTitleNull() throws Exception {
+        Film film=factory.getFilm(Language.ENG,FilmType.COMEDY,null);
+    }
+
+
 }

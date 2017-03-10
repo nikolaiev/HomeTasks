@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class MailDepartment {
     /*Publish departments list*/
-    Set<PunishmentDepartment> departmentList;
+    Set<PublishDepartment> departmentList;
     /*All known addresses(subscribers)*/
     Set<Subscriber> subscribers;
 
@@ -24,7 +24,9 @@ public class MailDepartment {
      * Add department to publish departments
      * @param department depart to add
      */
-    public void addDepartment(PunishmentDepartment department){
+    public void addDepartment(PublishDepartment department){
+        if(department==null)
+            throw new IllegalArgumentException();
         departmentList.add(department);
         /*set Observer object to observable*/
         department.setMailDepartment(this);
@@ -35,6 +37,8 @@ public class MailDepartment {
      * @param subscriber item to add
      */
     public void addSubscriber(Subscriber subscriber){
+        if(subscriber==null)
+            throw new IllegalArgumentException();
         subscribers.add(subscriber);
     }
 
@@ -44,7 +48,7 @@ public class MailDepartment {
      */
     public void sendMail(MailingItem mailing) {
         for(Subscriber subscriber:subscribers){
-            if(subscriber.getName()==mailing.getAddress()){
+            if(subscriber.getName().equals(mailing.getAddress())){
                 subscriber.getMailing(mailing);
                 System.out.println("Mail "+mailing.getTitle() +
                 "was sent to "+mailing.getAddress());
@@ -53,6 +57,6 @@ public class MailDepartment {
         }
 
         System.out.println("Address " + mailing.getAddress() +
-                "was not found from mailing "+mailing.getTitle());
+                " was not found from mailing "+mailing.getTitle());
     }
 }

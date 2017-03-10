@@ -5,7 +5,7 @@ package com.task22;
  */
 public abstract class MailingItem {
     /*publish department for this mailing item*/
-    PunishmentDepartment department;
+    PublishDepartment department;
     /*person's name is addressed to*/
     String address;
     String title;
@@ -15,7 +15,7 @@ public abstract class MailingItem {
      * @param department publish department
      * @param name item's name
      */
-    public MailingItem(PunishmentDepartment department, String name,String title){
+    public MailingItem(PublishDepartment department, String name, String title){
         this.department=department;
         this.address=name;
         this.title=title;

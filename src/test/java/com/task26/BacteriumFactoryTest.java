@@ -83,4 +83,29 @@ public class BacteriumFactoryTest {
         assertNotEquals(mySingleBacteriumFromFactroy2,mySingleBacteriumFromFactroy);
     }
 
+    /*Exceptions*/
+
+    /*Multi Cell bacterium*/
+    @Test(expected = IllegalArgumentException.class)
+    public void multiCellBacteriumTitleException(){
+        BacteriumFactory.getInstance().getMultyCellBacterium(null,1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void multiCellBacteriumCellCountException(){
+        BacteriumFactory.getInstance().getMultyCellBacterium("title",1);
+    }
+
+    /*Single Cell bacterium*/
+    @Test(expected = IllegalArgumentException.class)
+    public void singleCellBacteriumTitleException(){
+        BacteriumFactory.getInstance().getSingleCellBacterium(null,1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void singleCellBacteriumCellDiameterException(){
+        BacteriumFactory.getInstance().getMultyCellBacterium("title",0);
+    }
+
+
 }

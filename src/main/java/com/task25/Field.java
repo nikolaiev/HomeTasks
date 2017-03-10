@@ -36,6 +36,9 @@ public class Field {
      * @param cell  Cell object
      */
     public void setCell(int x,int y,Cell cell){
+        if(cell==null)
+            throw new IllegalArgumentException();
+
         cells[x][y]=cell;
     }
 

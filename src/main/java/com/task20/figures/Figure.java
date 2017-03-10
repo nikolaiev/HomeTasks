@@ -31,12 +31,17 @@ public class Figure{
         return cellCount;
     }
 
+    /*Factory methods*/
+
     /**
+     * Factory method
      * Method creates default figure objects
      * @param figureType    figure type
      * @return              new figure object
      */
     public Figure getFigure(FigureType figureType){
+        if(figureType==null)
+            throw new IllegalArgumentException();
         switch (figureType){
             case CUBE:return new Cube();
             case LINE:return new Line();
@@ -47,12 +52,15 @@ public class Figure{
     }
 
     /**
+     * Factory method
      * Method creates figure objects with set cell count
      * @param figureType    figure type
      * @param cellCount     new cell amount
      * @return              new figure
      */
     public Figure getFigure(FigureType figureType,int cellCount){
+        if(figureType==null)
+            throw new IllegalArgumentException();
         switch (figureType){
             case CUBE:return new Cube(cellCount);
             case LINE:return new Line(cellCount);

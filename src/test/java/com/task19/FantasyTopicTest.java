@@ -14,7 +14,6 @@ public class FantasyTopicTest {
     @Test
     public void cloneTest() {
         FantasyTopic fantasyTopicClone=fantasyTopic.clone();
-        System.out.println();
         assertEquals(fantasyTopicClone.getDefaultText(),defaultText);
     }
 }

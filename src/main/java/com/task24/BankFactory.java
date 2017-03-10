@@ -24,6 +24,16 @@ public class BankFactory {
      */
     public Bank getBank(Handler controllingHandler,
                    Handler withdrawingHandler, Handler fixationHandler){
+
+        if(controllingHandler==null)
+            throw new IllegalArgumentException();
+
+        if(withdrawingHandler==null)
+            throw new IllegalArgumentException();
+
+        if(fixationHandler==null)
+            throw new IllegalArgumentException();
+
         controllingHandler.setHandler(withdrawingHandler);
         withdrawingHandler.setHandler(fixationHandler);
 
@@ -39,8 +49,6 @@ public class BankFactory {
         WithdrawingHandler withdrawingHandler=new WithdrawingHandler();
         FixationHandler fixationHandler=new FixationHandler();
 
-        controllingHandler.setHandler(withdrawingHandler);
-        withdrawingHandler.setHandler(fixationHandler);
-        return new Bank(controllingHandler);
+        return getBank(controllingHandler,withdrawingHandler,fixationHandler);
     }
 }
