@@ -1,0 +1,2 @@
+# HomeTasks
+Philosophers concurrency task
