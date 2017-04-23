@@ -1,4 +1,5 @@
 # HomeTasks
+<<<<<<< HEAD
 
 Bitwise operations, RSA, Euclid algorithm, Junit, Sonar, Karatsuba multiplying algorithm.
 =======
@@ -6,4 +7,7 @@ Bitwise operations, RSA, Euclid algorithm, Junit, Sonar, Karatsuba multiplying a
 inner, nested classes. List implementations
 
 =======
-# HomeTasks3
+
+# HomeTsasks3
+=======
+# Homework 4
