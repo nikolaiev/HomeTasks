@@ -1,4 +1,7 @@
-.idea/*
+
 HomeTasks.iml
 /target
 /.idea
+target
+*.zip
+*.txt
